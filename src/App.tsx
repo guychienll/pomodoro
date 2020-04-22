@@ -6,13 +6,13 @@ import Dashboard from "./components/Dashboard";
 
 const Container = styled.div`
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   background-color: #eeeeee;
   display: flex;
 `;
 const TimerWrapper = styled.div<{ isDashboardOn: boolean }>`
   width: ${props => {
-    return props.isDashboardOn === true ? "60%" : "95%";
+    return props.isDashboardOn === true ? "60vw" : "95vw";
   }};
   background-color: #eaeaea;
   height: 100%;
@@ -20,9 +20,8 @@ const TimerWrapper = styled.div<{ isDashboardOn: boolean }>`
 `;
 const DashboardWrapper = styled.div<{ isDashboardOn: boolean }>`
   width: ${props => {
-    return props.isDashboardOn === true ? "40%" : "5%";
+    return props.isDashboardOn === true ? "40vw" : "5vw";
   }};
-  background-color: #333333;
   height: 100%;
   display: flex;
   transition: 0.3s ease-in-out;
