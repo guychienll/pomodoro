@@ -45,7 +45,7 @@ const Toggle: any = styled.div<{ toggledSrc: string; untoggledSrc: string }>`
 const Tag = styled.div<{ tomato: string; arrow: string; isDashboardOn: boolean }>`
   position: absolute;
   bottom: 50px;
-  right: 25px;
+  right: 2.5vw;
   width: 90px;
   height: 50px;
   border-radius: 25px 5px 5px 25px;
