@@ -9,20 +9,23 @@ const Container = styled.div`
   width: 100%;
   background-color: #eeeeee;
   display: flex;
-  background-color: #eaeaea;
 `;
 const TimerWrapper = styled.div<{ isDashboardOn: boolean }>`
   width: ${props => {
     return props.isDashboardOn === true ? "60%" : "95%";
   }};
+  background-color: #eaeaea;
   height: 100%;
+  transition: 0.3s ease-in-out;
 `;
 const DashboardWrapper = styled.div<{ isDashboardOn: boolean }>`
   width: ${props => {
     return props.isDashboardOn === true ? "40%" : "5%";
   }};
+  background-color: #333333;
   height: 100%;
   display: flex;
+  transition: 0.3s ease-in-out;
 `;
 const App = () => {
   const [isDashboardOn, setIsDashboardOn] = useState(false);
