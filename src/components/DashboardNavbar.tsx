@@ -117,14 +117,14 @@ export default DashboardNavbar;
 
 const toggles: any = [
   {
-    toggleName: "List",
-    toggledSrc: ListToggledIcon,
-    untoggledSrc: ListUntoggledIcon,
-  },
-  {
     toggleName: "Add",
     toggledSrc: AddToggledIcon,
     untoggledSrc: AddUntoggledIcon,
+  },
+  {
+    toggleName: "List",
+    toggledSrc: ListToggledIcon,
+    untoggledSrc: ListUntoggledIcon,
   },
   {
     toggleName: "Analysis",
