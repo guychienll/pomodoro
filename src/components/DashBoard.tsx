@@ -20,6 +20,7 @@ const Wrapper = styled.div<{ isDashboardOn: boolean }>`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  overflow: hidden;
 `;
 const DashboardTitle = styled.div`
   width: 80%;
