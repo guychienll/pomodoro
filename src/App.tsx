@@ -41,7 +41,7 @@ const App = () => {
     {
       type: enumDashboardType.AddNewTask,
       status: true,
-      name: "Add NEW TASK",
+      name: "ADD NEW TASK",
       toggledSrc: AddToggledIcon,
       untoggledSrc: AddUntoggledIcon,
     },

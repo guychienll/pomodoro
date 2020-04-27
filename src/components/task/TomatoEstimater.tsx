@@ -17,6 +17,9 @@ const Tomato = styled.div<{ tomatoStatus: string; onMouseOver: any }>`
   background-size: 100%;
   background-repeat: no-repeat;
   transition: 0.2s ease-in;
+  :hover {
+    cursor: pointer;
+  }
 `;
 const TomatoEstimater = () => {
   const [tomatos, setTomatos] = useState([

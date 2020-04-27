@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import FormBox from "../components/task/FormBox";
 import TomatoEstimater from "./task/TomatoEstimater";
 import { enumDashboardType } from "src/enum/enumDashboardType";
+import Button from "./shared/Button";
 
 const Wrapper = styled.div<{ isDashboardOn: boolean }>`
   height: 100%;
@@ -21,32 +22,51 @@ const Wrapper = styled.div<{ isDashboardOn: boolean }>`
   justify-content: flex-start;
 `;
 const DashboardTitle = styled.div`
-  color: #acacac;
-  font-size: 20px;
+  width: 80%;
+  color: #fcfcfc;
+  font-size: 24px;
   font-weight: bold;
+  font-family: Lato;
+  padding: 25px 0;
+  margin-top: 5px;
+  border-bottom: 1px solid #414141;
 `;
 
 const Dashboard: (props: any) => JSX.Element =props => {
   const getCurrentDashboard: () => JSX.Element = () => {
-    const current: enumDashboardType = props.dashboards.find(db => db.status === true).type;
-    switch (current) {
+    const current = props.dashboards.find(db => db.status === true);
+    switch (current.type) {
       case enumDashboardType.AddNewTask:
         return (
           <>
+            <DashboardTitle>{current.name}</DashboardTitle>
             <FormBox title="TASK TITLE">
               <input type="text" placeholder="My Second Task" />
             </FormBox>
             <FormBox title="ESTIMATED TOMOTO">
               <TomatoEstimater />
             </FormBox>
+            <Button btnStyle={{}} btnText={`ADD TASK`}></Button>
           </>
         );
       case enumDashboardType.TaskLists:
-        return <></>;
+        return (
+          <>
+            <DashboardTitle>{current.name}</DashboardTitle>
+          </>
+        );
       case enumDashboardType.AnalyticsReport:
-        return <></>;
+        return (
+          <>
+            <DashboardTitle>{current.name}</DashboardTitle>
+          </>
+        );
       case enumDashboardType.RingTone:
-        return <></>;
+        return (
+          <>
+            <DashboardTitle>{current.name}</DashboardTitle>
+          </>
+        );
       default:
         throw new Error("error");
     }
