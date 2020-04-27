@@ -1,13 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import ListUntoggledIcon from "../assets/icons/list_white.svg";
-import AddUntoggledIcon from "../assets/icons/add_white.svg";
-import RingtoneUntoggledIcon from "../assets/icons/ringtone_white.svg";
-import AnalysisUntoggledIcon from "../assets/icons/analysis_white.svg";
-import ListToggledIcon from "../assets/icons/list_red.svg";
-import AddToggledIcon from "../assets/icons/add_red.svg";
-import RingtoneToggledIcon from "../assets/icons/ringtone_red.svg";
-import AnalysisToggledIcon from "../assets/icons/analysis_red.svg";
 import TomatoColorfulIcon from "../assets/icons/tomato_small_color.svg";
 import ArrowIcon from "../assets/icons/arrow.svg";
 import PropTypes from "prop-types";
@@ -30,15 +22,15 @@ const Wrapper: any = styled.div<{ isDashboardOn: boolean }>`
   transition: 0.3s ease-in-out;
 `;
 
-const Toggle: any = styled.div<{ toggledSrc: string; untoggledSrc: string }>`
-  background-image: ${props => `url(${props.untoggledSrc})`};
+const Toggle: any = styled.div<{ imgSrc: string }>`
+  background-image: ${props => `url(${props.imgSrc})`};
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
   height: 80px;
   :hover {
-    background-image: ${props => `url(${props.toggledSrc})`};
+    background-image: ${props => `url(${props.imgSrc})`};
     cursor: pointer;
   }
 `;
@@ -80,25 +72,21 @@ const Tag = styled.div<{ tomato: string; arrow: string; isDashboardOn: boolean }
 const DashboardNavbar =props => {
   return (
     <Wrapper isDashboardOn={props.isDashboardOn}>
-      {toggles.map((toggle, index) => {
+      {props.dashboards.map(dashboard => {
         return (
           <Toggle
-            key={index}
-            onClick={e => {
-              if (props.isDashboardOn === true) {
-                return; // TODO: should change content or do nothing.
-              }
-              props.dashboardToggleHandler(e, !props.isDashboardOn);
+            key={dashboard.type}
+            onClick={() => {
+              props.handleDashboardToggleOnClick(dashboard.type);
             }}
-            toggledSrc={toggle.toggledSrc}
-            untoggledSrc={toggle.untoggledSrc}
+            imgSrc={dashboard.status ? dashboard.toggledSrc : dashboard.untoggledSrc}
           />
         );
       })}
       <Tag
         isDashboardOn={props.isDashboardOn}
-        onClick={e => {
-          props.dashboardToggleHandler(e, !props.isDashboardOn);
+        onClick={() => {
+          props.handleDashboardTagOnClick(!props.isDashboardOn);
         }}
         tomato={TomatoColorfulIcon}
         arrow={ArrowIcon}
@@ -110,31 +98,10 @@ const DashboardNavbar =props => {
   );
 };
 DashboardNavbar.prototype = {
-  dashboardToggleHandler: PropTypes.func,
+  handleDashboardToggleOnClick: PropTypes.func,
+  handleDashboardTagOnClick: PropTypes.func,
   isDashboardOn: PropTypes.bool,
+  dashboards: PropTypes.array,
 };
 
 export default DashboardNavbar;
-
-const toggles: any = [
-  {
-    toggleName: "Add",
-    toggledSrc: AddToggledIcon,
-    untoggledSrc: AddUntoggledIcon,
-  },
-  {
-    toggleName: "List",
-    toggledSrc: ListToggledIcon,
-    untoggledSrc: ListUntoggledIcon,
-  },
-  {
-    toggleName: "Analysis",
-    toggledSrc: AnalysisToggledIcon,
-    untoggledSrc: AnalysisUntoggledIcon,
-  },
-  {
-    toggleName: "Ringtone",
-    toggledSrc: RingtoneToggledIcon,
-    untoggledSrc: RingtoneUntoggledIcon,
-  },
-];
