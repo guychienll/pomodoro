@@ -36,7 +36,7 @@ const DashboardWrapper = styled.div<{ isDashboardOn: boolean }>`
   transition: 0.3s ease-in-out;
 `;
 const App = () => {
-  const [isDashboardOn, setIsDashboardOn] = useState(true);
+  const [isDashboardOn, setIsDashboardOn] = useState(false);
   const [dashboards, setDashboards] = useState([
     {
       type: enumDashboardType.AddNewTask,
@@ -73,6 +73,9 @@ const App = () => {
   ) => {
     const dashboardIsOn: any = dashboards.find(dashboard => dashboard.status === true);
     if (dashboardIsOn.type === dashboardType) {
+      setIsDashboardOn(!isDashboardOn);
+    }
+    if (dashboardIsOn.type !== dashboardType && isDashboardOn === false) {
       setIsDashboardOn(!isDashboardOn);
     }
     const cloneDashboards: any[] = [...dashboards];
