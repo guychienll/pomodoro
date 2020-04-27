@@ -11,8 +11,9 @@ import AnalysisToggledIcon from "../assets/icons/analysis_red.svg";
 import TomatoColorfulIcon from "../assets/icons/tomato_small_color.svg";
 import ArrowIcon from "../assets/icons/arrow.svg";
 import PropTypes from "prop-types";
+
 const Wrapper: any = styled.div<{ isDashboardOn: boolean }>`
-  width: 5vw;
+  min-width: 80px;
   height: 100%;
   display: flex;
   flex-direction: column;
