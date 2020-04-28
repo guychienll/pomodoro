@@ -14,14 +14,15 @@ import AnalysisToggledIcon from "./assets/icons/analysis_red.svg";
 import { enumDashboardType } from "./enum/enumDashboardType";
 import { enumTaskStatus } from "./enum/enumTaskStatus";
 import { ITask } from "./interface/ITask";
+import { IDashboard } from "./interface/IDashboard";
 
-const Container = styled.div`
+const Container: any = styled.div`
   height: 100vh;
   width: 100vw;
   background-color: transparent;
   display: flex;
 `;
-const TimerWrapper = styled.div<{ isDashboardOn: boolean }>`
+const TimerWrapper: any = styled.div<{ isDashboardOn: boolean }>`
   width: ${props => {
     return props.isDashboardOn === true ? "calc(65% - 80px)" : "calc(100% - 80px)";
   }};
@@ -29,7 +30,7 @@ const TimerWrapper = styled.div<{ isDashboardOn: boolean }>`
   height: 100%;
   transition: 0.3s ease-in-out;
 `;
-const DashboardWrapper = styled.div<{ isDashboardOn: boolean }>`
+const DashboardWrapper: any = styled.div<{ isDashboardOn: boolean }>`
   width: ${props => {
     return props.isDashboardOn === true ? "calc(35% + 80px)" : "80px";
   }};
@@ -37,40 +38,38 @@ const DashboardWrapper = styled.div<{ isDashboardOn: boolean }>`
   display: flex;
   transition: 0.3s ease-in-out;
 `;
-
-const App = () => {
+const App: () => JSX.Element = () => {
   const [isDashboardOn, setIsDashboardOn] = useState(true);
   const [dashboards, setDashboards] = useState([
     {
       type: enumDashboardType.AddNewTask,
-      status: false,
+      status: true,
       name: "ADD NEW TASK",
       toggledSrc: AddToggledIcon,
       untoggledSrc: AddUntoggledIcon,
-    },
+    } as IDashboard,
     {
       type: enumDashboardType.TaskLists,
-      status: true,
+      status: false,
       name: "TASK LISTS",
       toggledSrc: ListToggledIcon,
       untoggledSrc: ListUntoggledIcon,
-    },
+    } as IDashboard,
     {
       type: enumDashboardType.AnalyticsReport,
       status: false,
       name: "ANALYTICS REPORT",
       toggledSrc: AnalysisToggledIcon,
       untoggledSrc: AnalysisUntoggledIcon,
-    },
+    } as IDashboard,
     {
       type: enumDashboardType.RingTone,
       status: false,
       name: "RING TONE",
       toggledSrc: RingtoneToggledIcon,
       untoggledSrc: RingtoneUntoggledIcon,
-    },
+    } as IDashboard,
   ]);
-
   const [tasks, setTasks] = useState([
     {
       name: "First Task",
@@ -97,19 +96,18 @@ const App = () => {
       modifiedOn: new Date().getTime(),
     } as ITask,
   ]);
-
   const handleDashboardToggleOnClick: (dashboardType: enumDashboardType) => void = (
     dashboardType: enumDashboardType
   ) => {
-    const dashboardIsOn: any = dashboards.find(dashboard => dashboard.status === true);
+    const dashboardIsOn: IDashboard = dashboards.find(dashboard => dashboard.status === true);
     if (dashboardIsOn.type === dashboardType) {
       setIsDashboardOn(!isDashboardOn);
     }
     if (dashboardIsOn.type !== dashboardType && isDashboardOn === false) {
       setIsDashboardOn(!isDashboardOn);
     }
-    const cloneDashboards: any[] = [...dashboards];
-    const newDashboards: any[] = cloneDashboards.map(dashboard => {
+    const cloneDashboards: IDashboard[] = [...dashboards];
+    const newDashboards: IDashboard[] = cloneDashboards.map(dashboard => {
       dashboard.type !== dashboardType ? (dashboard.status = false) : (dashboard.status = true);
       return dashboard;
     });
@@ -118,7 +116,6 @@ const App = () => {
   const handleDashboardTagOnClick: (toggle: boolean) => void = (toggle: boolean) => {
     setIsDashboardOn(toggle);
   };
-
   const handleTaskOnClick: (key: number) => void = (key: number) => {
     const cloneTasks: ITask[] = [...tasks];
     cloneTasks.map(task => {
@@ -130,6 +127,7 @@ const App = () => {
     });
     setTasks(cloneTasks);
   };
+
   return (
     <Container>
       <TimerWrapper isDashboardOn={isDashboardOn} />

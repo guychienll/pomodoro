@@ -5,6 +5,9 @@ import PropTypes from "prop-types";
 import { enumTaskStatus } from "src/enum/enumTaskStatus";
 import { ITask } from "src/interface/ITask";
 import tomatoColor from "../../assets/icons/tomato_small_color.svg";
+import FormBox from "./FormBox";
+import TomatoEstimater from "./TomatoEstimater";
+import Button from "../shared/Button";
 const Wrapper = styled.div`
   width: 100%;
   display: flex;
@@ -89,7 +92,7 @@ const Title = styled.div`
 `;
 const Content = styled.div<{ isContentOn: boolean }>`
   width: 80%;
-  height: ${props => (props.isContentOn ? "200px" : "0")};
+  height: ${props => (props.isContentOn ? "380px" : "0")};
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
@@ -97,7 +100,19 @@ const Content = styled.div<{ isContentOn: boolean }>`
   transition: all 0.1s ease-in-out;
   overflow: hidden;
 `;
-
+const FormGroup = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+`;
+const BtnGroup = styled.div`
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+`;
 const NoDatas = styled.div`
   width: 80%;
   font-size: 2rem;
@@ -112,6 +127,26 @@ const TaskLists = (props: { children: any; tasks: ITask[]; handleTaskOnClick: an
   const handleTabStatusOnClick = (tabType: enumTaskStatus) => {
     setTabStatus(tabType);
   };
+
+  const ContentByTaskTypeMap: Map<enumTaskStatus, JSX.Element> = new Map([
+    [
+      enumTaskStatus.Todo,
+      <FormGroup>
+        <FormBox title="TASK TITLE">
+          <input type="text" placeholder="My Second Task" />
+        </FormBox>
+        <FormBox title="ESTIMATED TOMOTO">
+          <TomatoEstimater />
+        </FormBox>
+        <BtnGroup>
+          <Button btnStyle={{}} btnText="Archive" />
+          <Button btnStyle={{}} btnText="SAVE" />
+        </BtnGroup>
+      </FormGroup>,
+    ],
+    [enumTaskStatus.Done, null],
+    [enumTaskStatus.Archieve, null],
+  ]);
   return (
     <Wrapper>
       {props.children}
@@ -141,9 +176,10 @@ const TaskLists = (props: { children: any; tasks: ITask[]; handleTaskOnClick: an
             <Task>
               <List
                 key={sortedTask.createdOn}
-                headerIcon={<HeaderIcon isContentOn={sortedTask.isContentOn} />}
-                handleTaskOnClick={props.handleTaskOnClick}
                 primaryKey={sortedTask.createdOn}
+                handleTaskOnClick={props.handleTaskOnClick}
+                headerIcon={<HeaderIcon isContentOn={sortedTask.isContentOn} />}
+                actionBtn={<i className="fas fa-ellipsis-h fa-lg"></i>}
                 title={
                   <Title>
                     <div className="name">{sortedTask.name}</div>
@@ -154,9 +190,10 @@ const TaskLists = (props: { children: any; tasks: ITask[]; handleTaskOnClick: an
                     </div>
                   </Title>
                 }
-                actionBtn={<i className="fas fa-ellipsis-h fa-lg"></i>}
               />
-              <Content isContentOn={sortedTask.isContentOn}></Content>
+              <Content isContentOn={sortedTask.isContentOn}>
+                {ContentByTaskTypeMap.get(sortedTask.status)}
+              </Content>
             </Task>
           ))
       ) : (

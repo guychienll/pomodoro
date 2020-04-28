@@ -12,8 +12,7 @@ const Wrapper: any = styled.div<{ btnStyle: object }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
-
+  margin-top: 30px;
   color: #ea5548;
   border: 3px solid #ea5548;
   background-color: transparent;
