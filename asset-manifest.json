@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/pomodoro/static/css/main.648d8f63.chunk.css",
-    "main.js": "/pomodoro/static/js/main.ef5b685c.chunk.js",
-    "main.js.map": "/pomodoro/static/js/main.ef5b685c.chunk.js.map",
+    "main.js": "/pomodoro/static/js/main.601568a5.chunk.js",
+    "main.js.map": "/pomodoro/static/js/main.601568a5.chunk.js.map",
     "runtime-main.js": "/pomodoro/static/js/runtime-main.5f33536a.js",
     "runtime-main.js.map": "/pomodoro/static/js/runtime-main.5f33536a.js.map",
-    "static/js/2.5f5c5ecd.chunk.js": "/pomodoro/static/js/2.5f5c5ecd.chunk.js",
-    "static/js/2.5f5c5ecd.chunk.js.map": "/pomodoro/static/js/2.5f5c5ecd.chunk.js.map",
+    "static/js/2.f863081e.chunk.js": "/pomodoro/static/js/2.f863081e.chunk.js",
+    "static/js/2.f863081e.chunk.js.map": "/pomodoro/static/js/2.f863081e.chunk.js.map",
     "index.html": "/pomodoro/index.html",
-    "precache-manifest.319a116509293f751e81c5c2f7a5adb3.js": "/pomodoro/precache-manifest.319a116509293f751e81c5c2f7a5adb3.js",
+    "precache-manifest.e41d3d109efc85c04613f76c81520b6b.js": "/pomodoro/precache-manifest.e41d3d109efc85c04613f76c81520b6b.js",
     "service-worker.js": "/pomodoro/service-worker.js",
     "static/css/main.648d8f63.chunk.css.map": "/pomodoro/static/css/main.648d8f63.chunk.css.map",
-    "static/js/2.5f5c5ecd.chunk.js.LICENSE.txt": "/pomodoro/static/js/2.5f5c5ecd.chunk.js.LICENSE.txt",
+    "static/js/2.f863081e.chunk.js.LICENSE.txt": "/pomodoro/static/js/2.f863081e.chunk.js.LICENSE.txt",
     "static/media/add_red.svg": "/pomodoro/static/media/add_red.30013910.svg",
     "static/media/add_white.svg": "/pomodoro/static/media/add_white.32e0817a.svg",
     "static/media/analysis_red.svg": "/pomodoro/static/media/analysis_red.1998e7ea.svg",
@@ -26,8 +26,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.5f33536a.js",
-    "static/js/2.5f5c5ecd.chunk.js",
+    "static/js/2.f863081e.chunk.js",
     "static/css/main.648d8f63.chunk.css",
-    "static/js/main.ef5b685c.chunk.js"
+    "static/js/main.601568a5.chunk.js"
   ]
 }
