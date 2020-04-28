@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import styled from "styled-components";
 import DashboardNavbar from "./components/DashboardNavbar";
@@ -12,6 +12,8 @@ import AddToggledIcon from "./assets/icons/add_red.svg";
 import RingtoneToggledIcon from "./assets/icons/ringtone_red.svg";
 import AnalysisToggledIcon from "./assets/icons/analysis_red.svg";
 import { enumDashboardType } from "./enum/enumDashboardType";
+import { enumTaskStatus } from "./enum/enumTaskStatus";
+import { ITask } from "./interface/ITask";
 
 const Container = styled.div`
   height: 100vh;
@@ -35,19 +37,20 @@ const DashboardWrapper = styled.div<{ isDashboardOn: boolean }>`
   display: flex;
   transition: 0.3s ease-in-out;
 `;
+
 const App = () => {
-  const [isDashboardOn, setIsDashboardOn] = useState(false);
+  const [isDashboardOn, setIsDashboardOn] = useState(true);
   const [dashboards, setDashboards] = useState([
     {
       type: enumDashboardType.AddNewTask,
-      status: true,
+      status: false,
       name: "ADD NEW TASK",
       toggledSrc: AddToggledIcon,
       untoggledSrc: AddUntoggledIcon,
     },
     {
       type: enumDashboardType.TaskLists,
-      status: false,
+      status: true,
       name: "TASK LISTS",
       toggledSrc: ListToggledIcon,
       untoggledSrc: ListUntoggledIcon,
@@ -66,6 +69,33 @@ const App = () => {
       toggledSrc: RingtoneToggledIcon,
       untoggledSrc: RingtoneUntoggledIcon,
     },
+  ]);
+
+  const [tasks, setTasks] = useState([
+    {
+      name: "First Task",
+      estimated: 5,
+      status: enumTaskStatus.Todo,
+      isContentOn: false,
+      createdOn: 12345,
+      modifiedOn: new Date().getTime(),
+    } as ITask,
+    {
+      name: "Second Task",
+      estimated: 3,
+      status: enumTaskStatus.Todo,
+      isContentOn: true,
+      createdOn: 12346,
+      modifiedOn: new Date().getTime(),
+    } as ITask,
+    {
+      name: "Third Task",
+      estimated: 7,
+      status: enumTaskStatus.Done,
+      isContentOn: false,
+      createdOn: 12347,
+      modifiedOn: new Date().getTime(),
+    } as ITask,
   ]);
 
   const handleDashboardToggleOnClick: (dashboardType: enumDashboardType) => void = (
@@ -88,6 +118,18 @@ const App = () => {
   const handleDashboardTagOnClick: (toggle: boolean) => void = (toggle: boolean) => {
     setIsDashboardOn(toggle);
   };
+
+  const handleTaskOnClick: (key: number) => void = (key: number) => {
+    const cloneTasks: ITask[] = [...tasks];
+    cloneTasks.map(task => {
+      if (task.createdOn === key) {
+        task.isContentOn = !task.isContentOn;
+      } else {
+        task.isContentOn = false;
+      }
+    });
+    setTasks(cloneTasks);
+  };
   return (
     <Container>
       <TimerWrapper isDashboardOn={isDashboardOn} />
@@ -98,7 +140,12 @@ const App = () => {
           handleDashboardToggleOnClick={handleDashboardToggleOnClick}
           handleDashboardTagOnClick={handleDashboardTagOnClick}
         />
-        <Dashboard dashboards={dashboards} isDashboardOn={isDashboardOn} />
+        <Dashboard
+          dashboards={dashboards}
+          isDashboardOn={isDashboardOn}
+          tasks={tasks}
+          handleTaskOnClick={handleTaskOnClick}
+        />
       </DashboardWrapper>
     </Container>
   );

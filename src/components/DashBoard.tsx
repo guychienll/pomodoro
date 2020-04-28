@@ -1,11 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import FormBox from "../components/task/FormBox";
-import TomatoEstimater from "./task/TomatoEstimater";
 import { enumDashboardType } from "src/enum/enumDashboardType";
-import Button from "./shared/Button";
-
+import AddNewTask from "./task/AddNewTask";
+import TaskLists from "./task/TaskLists";
 const Wrapper = styled.div<{ isDashboardOn: boolean }>`
   height: 100%;
   background-color: #333333;
@@ -16,10 +14,6 @@ const Wrapper = styled.div<{ isDashboardOn: boolean }>`
   right: 0;
   top: 0;
   transition: 0.3s ease-in-out;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
   overflow: hidden;
 `;
 const DashboardTitle = styled.div`
@@ -39,35 +33,20 @@ const Dashboard: (props: any) => JSX.Element =props => {
     switch (current.type) {
       case enumDashboardType.AddNewTask:
         return (
-          <>
+          <AddNewTask>
             <DashboardTitle>{current.name}</DashboardTitle>
-            <FormBox title="TASK TITLE">
-              <input type="text" placeholder="My Second Task" />
-            </FormBox>
-            <FormBox title="ESTIMATED TOMOTO">
-              <TomatoEstimater />
-            </FormBox>
-            <Button btnStyle={{}} btnText={`ADD TASK`}></Button>
-          </>
+          </AddNewTask>
         );
       case enumDashboardType.TaskLists:
         return (
-          <>
+          <TaskLists handleTaskOnClick={props.handleTaskOnClick} tasks={props.tasks}>
             <DashboardTitle>{current.name}</DashboardTitle>
-          </>
+          </TaskLists>
         );
       case enumDashboardType.AnalyticsReport:
-        return (
-          <>
-            <DashboardTitle>{current.name}</DashboardTitle>
-          </>
-        );
+        return <DashboardTitle>{current.name}</DashboardTitle>;
       case enumDashboardType.RingTone:
-        return (
-          <>
-            <DashboardTitle>{current.name}</DashboardTitle>
-          </>
-        );
+        return <DashboardTitle>{current.name}</DashboardTitle>;
       default:
         throw new Error("error");
     }
@@ -82,6 +61,7 @@ const Dashboard: (props: any) => JSX.Element =props => {
 Dashboard.prototype = {
   isDashboardOn: PropTypes.bool,
   dashboards: PropTypes.array,
+  tasks: PropTypes.array,
 };
 
 export default Dashboard;

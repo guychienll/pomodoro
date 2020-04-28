@@ -22,7 +22,7 @@ const Tomato = styled.div<{ tomatoStatus: string; onMouseOver: any }>`
   }
 `;
 const TomatoEstimater = () => {
-  const [tomatos, setTomatos] = useState([
+  const [tomatos] = useState([
     false,
     false,
     false,
