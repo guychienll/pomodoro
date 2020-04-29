@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import TomatoColorfulIcon from "../assets/icons/tomato_small_color.svg";
 import ArrowIcon from "../assets/icons/arrow.svg";
-import PropTypes from "prop-types";
+import { dashboardNavBarProps } from "../typeAlias/dashboardNavBarProps";
 
 const Wrapper: any = styled.div<{ isDashboardOn: boolean }>`
   min-width: 80px;
@@ -21,7 +21,6 @@ const Wrapper: any = styled.div<{ isDashboardOn: boolean }>`
   }};
   transition: 0.3s ease-in-out;
 `;
-
 const Toggle: any = styled.div<{ imgSrc: string }>`
   background-image: ${props => `url(${props.imgSrc})`};
   background-position: center;
@@ -34,8 +33,7 @@ const Toggle: any = styled.div<{ imgSrc: string }>`
     cursor: pointer;
   }
 `;
-
-const Tag = styled.div<{ tomato: string; arrow: string; isDashboardOn: boolean }>`
+const Tag: any = styled.div<{ tomato: string; arrow: string; isDashboardOn: boolean }>`
   position: absolute;
   bottom: 50px;
   right: 45px;
@@ -69,7 +67,7 @@ const Tag = styled.div<{ tomato: string; arrow: string; isDashboardOn: boolean }
   }
 `;
 
-const DashboardNavbar =props => {
+const DashboardNavbar: (props: dashboardNavBarProps) => JSX.Element =props => {
   return (
     <Wrapper isDashboardOn={props.isDashboardOn}>
       {props.dashboards.map(dashboard => {
@@ -96,12 +94,6 @@ const DashboardNavbar =props => {
       </Tag>
     </Wrapper>
   );
-};
-DashboardNavbar.prototype = {
-  handleDashboardToggleOnClick: PropTypes.func,
-  handleDashboardTagOnClick: PropTypes.func,
-  isDashboardOn: PropTypes.bool,
-  dashboards: PropTypes.array,
 };
 
 export default DashboardNavbar;

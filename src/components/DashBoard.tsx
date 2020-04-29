@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 import { enumDashboardType } from "src/enum/enumDashboardType";
 import AddNewTask from "./task/AddNewTask";
 import TaskLists from "./task/TaskLists";
 import { IDashboard } from "src/interface/IDashboard";
-const Wrapper = styled.div<{ isDashboardOn: boolean }>`
+import { dashboardProps } from "../typeAlias/dashboardProps";
+const Wrapper: any = styled.div<{ isDashboardOn: boolean }>`
   height: 100%;
   background-color: #333333;
   width: ${props => {
@@ -17,7 +17,7 @@ const Wrapper = styled.div<{ isDashboardOn: boolean }>`
   transition: 0.3s ease-in-out;
   overflow: hidden;
 `;
-const DashboardTitle = styled.div`
+const DashboardTitle: any = styled.div`
   width: 80%;
   color: #fcfcfc;
   font-size: 24px;
@@ -28,7 +28,7 @@ const DashboardTitle = styled.div`
   border-bottom: 1px solid #414141;
 `;
 
-const Dashboard: (props: any) => JSX.Element =props => {
+const Dashboard: (props: dashboardProps) => JSX.Element =props => {
   const current: IDashboard = props.dashboards.find(db => db.status === true);
   const dashboardByCurrentStatusMap: Map<enumDashboardType, JSX.Element> = new Map([
     [
@@ -51,12 +51,6 @@ const Dashboard: (props: any) => JSX.Element =props => {
       {props.isDashboardOn ? dashboardByCurrentStatusMap.get(current.type) : null}
     </Wrapper>
   );
-};
-
-Dashboard.prototype = {
-  isDashboardOn: PropTypes.bool,
-  dashboards: PropTypes.array,
-  tasks: PropTypes.array,
 };
 
 export default Dashboard;

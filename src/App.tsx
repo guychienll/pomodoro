@@ -3,18 +3,11 @@ import "./App.css";
 import styled from "styled-components";
 import DashboardNavbar from "./components/DashboardNavbar";
 import Dashboard from "./components/Dashboard";
-import ListUntoggledIcon from "./assets/icons/list_white.svg";
-import AddUntoggledIcon from "./assets/icons/add_white.svg";
-import RingtoneUntoggledIcon from "./assets/icons/ringtone_white.svg";
-import AnalysisUntoggledIcon from "./assets/icons/analysis_white.svg";
-import ListToggledIcon from "./assets/icons/list_red.svg";
-import AddToggledIcon from "./assets/icons/add_red.svg";
-import RingtoneToggledIcon from "./assets/icons/ringtone_red.svg";
-import AnalysisToggledIcon from "./assets/icons/analysis_red.svg";
 import { enumDashboardType } from "./enum/enumDashboardType";
-import { enumTaskStatus } from "./enum/enumTaskStatus";
 import { ITask } from "./interface/ITask";
 import { IDashboard } from "./interface/IDashboard";
+import { initDashboards } from "./components/initDashboards";
+import { enumTaskStatus } from "./enum/enumTaskStatus";
 
 const Container: any = styled.div`
   height: 100vh;
@@ -38,64 +31,11 @@ const DashboardWrapper: any = styled.div<{ isDashboardOn: boolean }>`
   display: flex;
   transition: 0.3s ease-in-out;
 `;
+
 const App: () => JSX.Element = () => {
   const [isDashboardOn, setIsDashboardOn] = useState(true);
-  const [dashboards, setDashboards] = useState([
-    {
-      type: enumDashboardType.AddNewTask,
-      status: true,
-      name: "ADD NEW TASK",
-      toggledSrc: AddToggledIcon,
-      untoggledSrc: AddUntoggledIcon,
-    } as IDashboard,
-    {
-      type: enumDashboardType.TaskLists,
-      status: false,
-      name: "TASK LISTS",
-      toggledSrc: ListToggledIcon,
-      untoggledSrc: ListUntoggledIcon,
-    } as IDashboard,
-    {
-      type: enumDashboardType.AnalyticsReport,
-      status: false,
-      name: "ANALYTICS REPORT",
-      toggledSrc: AnalysisToggledIcon,
-      untoggledSrc: AnalysisUntoggledIcon,
-    } as IDashboard,
-    {
-      type: enumDashboardType.RingTone,
-      status: false,
-      name: "RING TONE",
-      toggledSrc: RingtoneToggledIcon,
-      untoggledSrc: RingtoneUntoggledIcon,
-    } as IDashboard,
-  ]);
-  const [tasks, setTasks] = useState([
-    {
-      name: "First Task",
-      estimated: 5,
-      status: enumTaskStatus.Todo,
-      isContentOn: false,
-      createdOn: 12345,
-      modifiedOn: new Date().getTime(),
-    } as ITask,
-    {
-      name: "Second Task",
-      estimated: 3,
-      status: enumTaskStatus.Todo,
-      isContentOn: true,
-      createdOn: 12346,
-      modifiedOn: new Date().getTime(),
-    } as ITask,
-    {
-      name: "Third Task",
-      estimated: 7,
-      status: enumTaskStatus.Done,
-      isContentOn: false,
-      createdOn: 12347,
-      modifiedOn: new Date().getTime(),
-    } as ITask,
-  ]);
+  const [dashboards, setDashboards] = useState(initDashboards);
+  const [tasks, setTasks] = useState([]);
   const handleDashboardToggleOnClick: (dashboardType: enumDashboardType) => void = (
     dashboardType: enumDashboardType
   ) => {
