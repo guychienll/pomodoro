@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./App.css";
 import styled from "styled-components";
 import DashboardNavbar from "./components/DashboardNavbar";
 import Dashboard from "./components/Dashboard";
@@ -7,7 +6,6 @@ import { enumDashboardType } from "./enum/enumDashboardType";
 import { ITask } from "./interface/ITask";
 import { IDashboard } from "./interface/IDashboard";
 import { initDashboards } from "./components/initDashboards";
-import { enumTaskStatus } from "./enum/enumTaskStatus";
 
 const Container: any = styled.div`
   height: 100vh;
