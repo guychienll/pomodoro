@@ -3,11 +3,11 @@ import styled from "styled-components";
 import List from "../shared/List";
 import PropTypes from "prop-types";
 import { enumTaskStatus } from "src/enum/enumTaskStatus";
-import { ITask } from "src/interface/ITask";
 import tomatoColor from "../../assets/icons/tomato_small_color.svg";
 import FormBox from "./FormBox";
 import TomatoEstimater from "./TomatoEstimater";
 import Button from "../shared/Button";
+import { taskListsProps } from "../../typeAlias/taskListsProps";
 const Wrapper = styled.div`
   width: 100%;
   display: flex;
@@ -122,7 +122,7 @@ const NoDatas = styled.div`
   margin-top: 30px;
 `;
 
-const TaskLists = (props: { children: any; tasks: ITask[]; handleTaskOnClick: any }) => {
+const TaskLists = (props: taskListsProps) => {
   const [tabStatus, setTabStatus] = useState(enumTaskStatus.Todo);
   const handleTabStatusOnClick = (tabType: enumTaskStatus) => {
     setTabStatus(tabType);
@@ -135,12 +135,10 @@ const TaskLists = (props: { children: any; tasks: ITask[]; handleTaskOnClick: an
         <FormBox title="TASK TITLE">
           <input type="text" placeholder="My Second Task" />
         </FormBox>
-        <FormBox title="ESTIMATED TOMOTO">
-          <TomatoEstimater />
-        </FormBox>
+        <FormBox title="ESTIMATED TOMOTO">{/* <TomatoEstimater /> */}</FormBox>
         <BtnGroup>
-          <Button btnStyle={{}} btnText="Archive" />
-          <Button btnStyle={{}} btnText="SAVE" />
+          {/* <Button btnStyle={{}} btnText="Archive" />
+          <Button btnStyle={{}} btnText="SAVE" /> */}
         </BtnGroup>
       </FormGroup>,
     ],

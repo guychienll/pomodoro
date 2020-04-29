@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 
 const Wrapper: any = styled.div<{ btnStyle: object }>`
   width: 80%;
@@ -25,12 +24,12 @@ const Wrapper: any = styled.div<{ btnStyle: object }>`
   }
 `;
 
-const Button: (props: any) => JSX.Element =props => {
-  return <Wrapper btnStyle={props.btnStyle}>{props.btnText}</Wrapper>;
+const Button: (props: { btnText: string; btnStyle: object; btnAction: any }) => JSX.Element =props => {
+  return (
+    <Wrapper onClick={props.btnAction} btnStyle={props.btnStyle}>
+      {props.btnText}
+    </Wrapper>
+  );
 };
 
-Button.prototype = {
-  btnText: PropTypes.string,
-  btnStyle: PropTypes.object,
-};
 export default Button;

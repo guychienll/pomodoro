@@ -8,7 +8,7 @@ import { dashboardProps } from "../typeAlias/dashboardProps";
 const Wrapper: any = styled.div<{ isDashboardOn: boolean }>`
   height: 100%;
   background-color: #333333;
-  width: ${props => {
+  width: ${(props) => {
     return props.isDashboardOn === false ? "0%" : "35%";
   }};
   position: absolute;
@@ -28,12 +28,16 @@ const DashboardTitle: any = styled.div`
   border-bottom: 1px solid #414141;
 `;
 
-const Dashboard: (props: dashboardProps) => JSX.Element =props => {
-  const current: IDashboard = props.dashboards.find(db => db.status === true);
+const Dashboard: (props: dashboardProps) => JSX.Element = (props) => {
+  const current: IDashboard = props.dashboards.find((db) => db.status === true);
   const dashboardByCurrentStatusMap: Map<enumDashboardType, JSX.Element> = new Map([
     [
       enumDashboardType.AddNewTask,
-      <AddNewTask>
+      <AddNewTask
+        taskBuffer={props.taskBuffer}
+        handleAddNewTaskOnClick={props.handleAddNewTaskOnClick}
+        handleTaskBufferOnChange={props.handleTaskBufferOnChange}
+      >
         <DashboardTitle>{current.name}</DashboardTitle>
       </AddNewTask>,
     ],

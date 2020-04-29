@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import tomatoColor from "../../assets/icons/tomato_small_color.svg";
 import tomatoGray from "../../assets/icons/tomato_small_gray.svg";
+import { ITask } from "src/interface/ITask";
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,20 +22,10 @@ const Tomato = styled.div<{ tomatoStatus: string; onMouseOver: any }>`
     cursor: pointer;
   }
 `;
-const TomatoEstimater = () => {
-  const [tomatos] = useState([
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]);
-  const [estimatedValue, setEstimatedValue] = useState(0);
+const TomatoEstimater: (props: {
+  taskBuffer: ITask;
+  handleTaskBufferOnChange: any;
+}) => JSX.Element =props => {
   const [estimatedValueBuffer, setEstimatedValueBuffer] = useState(0);
   const handleTomatosMouseOver: (index: number) => void =index => {
     setEstimatedValueBuffer(index + 1);
@@ -42,25 +33,26 @@ const TomatoEstimater = () => {
   const handleTomatosMouseOut: (index: number) => void =index => {
     setEstimatedValueBuffer(0);
   };
-  const handleTomatosClick: (index: number) => void =index => {
-    setEstimatedValue(index + 1);
-  };
+  const { estimated } = props.taskBuffer;
   return (
     <Wrapper>
-      {tomatos.map((tomato, index) => (
+      {estimated.map((tomato, index) => (
         <Tomato
           key={index}
+          id="estimated"
           onMouseOver={() => {
             handleTomatosMouseOver(index);
           }}
           onMouseOut={() => {
             handleTomatosMouseOut(index);
           }}
-          onClick={() => {
-            handleTomatosClick(index);
+          onClick={e => {
+            let cloneEstimated: boolean[] = [...estimated];
+            cloneEstimated = cloneEstimated.map((e, i) => (i <= index ? true : false));
+            props.handleTaskBufferOnChange(e, cloneEstimated);
           }}
           tomatoStatus={
-            estimatedValue > index
+            estimated.filter(e => e === true).length > index
               ? tomatoColor
               : tomatoGray && estimatedValueBuffer > index
               ? tomatoColor

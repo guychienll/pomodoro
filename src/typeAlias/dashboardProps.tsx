@@ -5,4 +5,7 @@ export type dashboardProps = {
   dashboards: IDashboard[];
   tasks: ITask[];
   handleTaskOnClick: any;
+  handleAddNewTaskOnClick: any;
+  taskBuffer: ITask;
+  handleTaskBufferOnChange: any;
 };
