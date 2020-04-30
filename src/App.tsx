@@ -54,11 +54,11 @@ const App: () => JSX.Element = () => {
     setTaskBuffer(initTaskBuffer);
   };
 
-  const handleDashboardToggleOnClick: (
-    dashboardToggleType: enumDashboardToggleType,
+  const handleDashboardToggleOnClick: (e: any, dashboardType?: enumDashboardType) => void = (
+    e: any,
     dashboardType?: enumDashboardType
-  ) => void = (dashboardToggleType: enumDashboardToggleType, dashboardType?: enumDashboardType) => {
-    if (dashboardToggleType === enumDashboardToggleType.Tag) {
+  ) => {
+    if (e.target.name === enumDashboardToggleType.Tag) {
       setIsDashboardOn(!isDashboardOn);
       return;
     }

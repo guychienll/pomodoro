@@ -18,9 +18,6 @@ const Tomato = styled.button<{ tomatoStatus: string }>`
   background-size: 100%;
   background-repeat: no-repeat;
   transition: 0.2s ease-in;
-  background-color: transparent;
-  border: none;
-  outline: none;
   :hover {
     cursor: pointer;
   }

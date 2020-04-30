@@ -22,7 +22,7 @@ const Wrapper: any = styled.div<{ isDashboardOn: boolean }>`
   }};
   transition: 0.3s ease-in-out;
 `;
-const Toggle: any = styled.div<{ imgSrc: string }>`
+const Toggle: any = styled.button<{ imgSrc: string }>`
   background-image: ${props => `url(${props.imgSrc})`};
   background-position: center;
   background-size: cover;
@@ -34,7 +34,7 @@ const Toggle: any = styled.div<{ imgSrc: string }>`
     cursor: pointer;
   }
 `;
-const Tag: any = styled.div<{ tomato: string; arrow: string; isDashboardOn: boolean }>`
+const Tag: any = styled.button<{ tomato: string; arrow: string; isDashboardOn: boolean }>`
   position: absolute;
   bottom: 50px;
   right: 45px;
@@ -43,10 +43,10 @@ const Tag: any = styled.div<{ tomato: string; arrow: string; isDashboardOn: bool
   border-radius: 25px 5px 5px 25px;
   background-color: #fcfcfc;
   display: flex;
-  :hover {
-    cursor: pointer;
-  }
   .tomato {
+    position: absolute;
+    top: 0px;
+    left: 0px;
     width: 45px;
     height: 100%;
     background-image: ${props => `url(${props.tomato})`};
@@ -55,6 +55,9 @@ const Tag: any = styled.div<{ tomato: string; arrow: string; isDashboardOn: bool
     background-repeat: no-repeat;
   }
   .arrow {
+    position: absolute;
+    top: 0px;
+    right: 0px;
     width: 45px;
     height: 100%;
     background-image: ${props => `url(${props.arrow})`};
@@ -75,9 +78,10 @@ const DashboardNavbar: (props: dashboardNavBarProps) => JSX.Element =props => {
       {dashboards.map(dashboard => {
         return (
           <Toggle
+            name={enumDashboardToggleType.NavButton}
             key={dashboard.type}
-            onClick={() => {
-              handleDashboardToggleOnClick(enumDashboardToggleType.NavButton, dashboard.type);
+            onClick={(e: any) => {
+              handleDashboardToggleOnClick(e, dashboard.type);
             }}
             imgSrc={dashboard.status ? dashboard.toggledSrc : dashboard.untoggledSrc}
           />
@@ -85,14 +89,27 @@ const DashboardNavbar: (props: dashboardNavBarProps) => JSX.Element =props => {
       })}
       <Tag
         isDashboardOn={isDashboardOn}
-        onClick={() => {
-          handleDashboardToggleOnClick(enumDashboardToggleType.Tag);
-        }}
+        name={enumDashboardToggleType.Tag.toString()}
         tomato={TomatoColorfulIcon}
         arrow={ArrowIcon}
+        onClick={(e: any) => {
+          handleDashboardToggleOnClick(e);
+        }}
       >
-        <div className="tomato" />
-        <div className="arrow" />
+        <button
+          className="tomato"
+          name={enumDashboardToggleType.Tag.toString()}
+          onClick={(e: any) => {
+            handleDashboardToggleOnClick(e);
+          }}
+        />
+        <button
+          className="arrow"
+          name={enumDashboardToggleType.Tag.toString()}
+          onClick={(e: any) => {
+            handleDashboardToggleOnClick(e);
+          }}
+        />
       </Tag>
     </Wrapper>
   );
