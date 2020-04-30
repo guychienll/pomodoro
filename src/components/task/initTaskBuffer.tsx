@@ -2,7 +2,7 @@ import { ITask } from "../../interface/ITask";
 import { enumTaskStatus } from "../../enum/enumTaskStatus";
 export const initTaskBuffer: ITask = {
   name: "",
-  estimated: [false, false, false, false, false, false, false, false, false, false],
+  point: 0,
   isContentOn: false,
   status: enumTaskStatus.Todo,
   createdOn: 0,

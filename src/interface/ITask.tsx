@@ -1,7 +1,7 @@
 import { enumTaskStatus } from "../enum/enumTaskStatus";
 export interface ITask {
   name: string;
-  estimated: boolean[];
+  point: number;
   status: enumTaskStatus;
   isContentOn: boolean;
   createdOn: number;

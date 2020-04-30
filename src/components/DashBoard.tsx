@@ -8,7 +8,7 @@ import { dashboardProps } from "../typeAlias/dashboardProps";
 const Wrapper: any = styled.div<{ isDashboardOn: boolean }>`
   height: 100%;
   background-color: #333333;
-  width: ${(props) => {
+  width: ${props => {
     return props.isDashboardOn === false ? "0%" : "35%";
   }};
   position: absolute;
@@ -28,31 +28,41 @@ const DashboardTitle: any = styled.div`
   border-bottom: 1px solid #414141;
 `;
 
-const Dashboard: (props: dashboardProps) => JSX.Element = (props) => {
-  const current: IDashboard = props.dashboards.find((db) => db.status === true);
+const Dashboard: (props: dashboardProps) => JSX.Element =props => {
+  const { name: currentName, type: currentType }: IDashboard = props.dashboards.find(db => db.status === true
+  );
+  const {
+    taskBuffer,
+    handleAddNewTaskOnClick,
+    handleTaskBufferOnChange,
+    tasks,
+    handleTaskOnClick,
+    isDashboardOn,
+  } = props;
+
   const dashboardByCurrentStatusMap: Map<enumDashboardType, JSX.Element> = new Map([
     [
       enumDashboardType.AddNewTask,
       <AddNewTask
-        taskBuffer={props.taskBuffer}
-        handleAddNewTaskOnClick={props.handleAddNewTaskOnClick}
-        handleTaskBufferOnChange={props.handleTaskBufferOnChange}
+        taskBuffer={taskBuffer}
+        handleAddNewTaskOnClick={handleAddNewTaskOnClick}
+        handleTaskBufferOnChange={handleTaskBufferOnChange}
       >
-        <DashboardTitle>{current.name}</DashboardTitle>
+        <DashboardTitle>{currentName}</DashboardTitle>
       </AddNewTask>,
     ],
     [
       enumDashboardType.TaskLists,
-      <TaskLists handleTaskOnClick={props.handleTaskOnClick} tasks={props.tasks}>
-        <DashboardTitle>{current.name}</DashboardTitle>
+      <TaskLists handleTaskOnClick={handleTaskOnClick} tasks={tasks}>
+        <DashboardTitle>{currentName}</DashboardTitle>
       </TaskLists>,
     ],
     [enumDashboardType.AnalyticsReport, null],
     [enumDashboardType.RingTone, null],
   ]);
   return (
-    <Wrapper isDashboardOn={props.isDashboardOn}>
-      {props.isDashboardOn ? dashboardByCurrentStatusMap.get(current.type) : null}
+    <Wrapper isDashboardOn={isDashboardOn}>
+      {isDashboardOn ? dashboardByCurrentStatusMap.get(currentType) : null}
     </Wrapper>
   );
 };

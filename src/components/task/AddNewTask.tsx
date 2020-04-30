@@ -15,25 +15,26 @@ const Wrapper = styled.div`
 
 const AddNewTask: (props: addNewTaskProps) => JSX.Element =props => {
   const { name } = props.taskBuffer;
+  const { handleAddNewTaskOnClick, handleTaskBufferOnChange, taskBuffer, children } = props;
   return (
     <Wrapper>
-      {props.children}
+      {children}
       <FormBox title="TASK TITLE">
         <input
           name="name"
           value={name}
-          onChange={props.handleTaskBufferOnChange}
+          onChange={handleTaskBufferOnChange}
           type="text"
-          placeholder="My Second Task"
+          placeholder="Plz Enter your task ..."
         />
       </FormBox>
       <FormBox title="ESTIMATED TOMOTO">
         <TomatoEstimater
-          handleTaskBufferOnChange={props.handleTaskBufferOnChange}
-          taskBuffer={props.taskBuffer}
+          handleTaskBufferOnChange={handleTaskBufferOnChange}
+          taskBuffer={taskBuffer}
         />
       </FormBox>
-      <Button btnAction={props.handleAddNewTaskOnClick} btnStyle={{}} btnText={`ADD TASK`} />
+      <Button btnAction={handleAddNewTaskOnClick} btnStyle={{}} btnText={`ADD TASK`} />
     </Wrapper>
   );
 };

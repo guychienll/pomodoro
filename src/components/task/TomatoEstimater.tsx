@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   width: 100%;
   height: 50px;
 `;
-const Tomato = styled.div<{ tomatoStatus: string; onMouseOver: any }>`
+const Tomato = styled.button<{ tomatoStatus: string }>`
   width: calc(100% / 15);
   height: 100%;
   background-image: ${props => `url(${props.tomatoStatus})`};
@@ -18,48 +18,51 @@ const Tomato = styled.div<{ tomatoStatus: string; onMouseOver: any }>`
   background-size: 100%;
   background-repeat: no-repeat;
   transition: 0.2s ease-in;
+  background-color: transparent;
+  border: none;
+  outline: none;
   :hover {
     cursor: pointer;
   }
 `;
+
 const TomatoEstimater: (props: {
   taskBuffer: ITask;
   handleTaskBufferOnChange: any;
 }) => JSX.Element =props => {
+  const tomatos: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const [estimatedValueBuffer, setEstimatedValueBuffer] = useState(0);
-  const handleTomatosMouseOver: (index: number) => void =index => {
-    setEstimatedValueBuffer(index + 1);
+  const handleTomatosMouseOver: (value: number) => void =value => {
+    setEstimatedValueBuffer(value);
   };
-  const handleTomatosMouseOut: (index: number) => void =_index => {
+  const handleTomatosMouseOut: (value: number) => void =value => {
     setEstimatedValueBuffer(0);
   };
-  const { estimated } = props.taskBuffer;
   return (
     <Wrapper>
-      {estimated.map((_tomato, index) => (
-        <Tomato
-          key={index}
-          id="estimated"
-          onMouseOver={() => {
-            handleTomatosMouseOver(index);
-          }}
-          onMouseOut={() => {
-            handleTomatosMouseOut(index);
-          }}
-          onClick={e => {
-            let cloneEstimated: boolean[] = [...estimated];
-            cloneEstimated = cloneEstimated.map((_e, i) => (i <= index ? true : false));
-            props.handleTaskBufferOnChange(e, cloneEstimated);
-          }}
-          tomatoStatus={
-            estimated.filter(e => e === true).length > index
-              ? tomatoColor
-              : tomatoGray && estimatedValueBuffer > index
-              ? tomatoColor
-              : tomatoGray
-          }
-        />
-      ))}
+      {tomatos.map(value => {
+        return (
+          <Tomato
+            key={value}
+            name="point"
+            value={value}
+            onMouseOver={() => {
+              handleTomatosMouseOver(value);
+            }}
+            onMouseOut={() => {
+              handleTomatosMouseOut(value);
+            }}
+            onClick={e => {
+              props.handleTaskBufferOnChange(e);
+            }}
+            tomatoStatus={
+              props.taskBuffer.point >= value || estimatedValueBuffer >= value
+                ? tomatoColor
+                : tomatoGray
+            }
+          />
+        );
+      })}
     </Wrapper>
   );
 };

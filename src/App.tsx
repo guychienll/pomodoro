@@ -38,14 +38,8 @@ const App: () => JSX.Element = () => {
   const [taskBuffer, setTaskBuffer] = useState(initTaskBuffer as ITask);
   const [tasks, setTasks] = useState([] as ITask[]);
 
-  const handleTaskBufferOnChange: (e: any, estimated?: boolean[]) => void = (
-    e: any,
-    estimated?: boolean[]
-  ) => {
+  const handleTaskBufferOnChange: (e: any) => void = (e: any) => {
     const cloneTaskBuffer: ITask = { ...taskBuffer };
-    if (e.target.id === "estimated") {
-      cloneTaskBuffer[e.target.id] = estimated;
-    }
     cloneTaskBuffer[e.target.name] = e.target.value;
     setTaskBuffer(cloneTaskBuffer);
   };
