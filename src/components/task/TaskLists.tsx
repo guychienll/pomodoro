@@ -5,8 +5,6 @@ import PropTypes from "prop-types";
 import { enumTaskStatus } from "src/enum/enumTaskStatus";
 import tomatoColor from "../../assets/icons/tomato_small_color.svg";
 import FormBox from "./FormBox";
-import TomatoEstimater from "./TomatoEstimater";
-import Button from "../shared/Button";
 import { taskListsProps } from "../../typeAlias/taskListsProps";
 const Wrapper = styled.div`
   width: 100%;
@@ -171,9 +169,8 @@ const TaskLists = (props: taskListsProps) => {
           .filter(task => task.status === tabStatus)
           .sort((t1, t2) => (t1.modifiedOn > t2.modifiedOn ? -1 : 1))
           .map(sortedTask => (
-            <Task>
+            <Task key={sortedTask.createdOn}>
               <List
-                key={sortedTask.createdOn}
                 primaryKey={sortedTask.createdOn}
                 handleTaskOnClick={props.handleTaskOnClick}
                 headerIcon={<HeaderIcon isContentOn={sortedTask.isContentOn} />}

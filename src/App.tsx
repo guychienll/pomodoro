@@ -6,7 +6,7 @@ import { enumDashboardType } from "./enum/enumDashboardType";
 import { ITask } from "./interface/ITask";
 import { IDashboard } from "./interface/IDashboard";
 import { initDashboards } from "./components/initDashboards";
-import { enumTaskStatus } from "./enum/enumTaskStatus";
+import { initTaskBuffer } from "./initTaskBuffer";
 
 const Container: any = styled.div`
   height: 100vh;
@@ -34,14 +34,7 @@ const DashboardWrapper: any = styled.div<{ isDashboardOn: boolean }>`
 const App: () => JSX.Element = () => {
   const [isDashboardOn, setIsDashboardOn] = useState(true as boolean);
   const [dashboards, setDashboards] = useState(initDashboards as IDashboard[]);
-  const [taskBuffer, setTaskBuffer] = useState({
-    name: "",
-    estimated: [false, false, false, false, false, false, false, false, false, false],
-    isContentOn: false,
-    status: enumTaskStatus.Todo,
-    createdOn: new Date().getTime(),
-    modifiedOn: new Date().getTime(),
-  } as ITask);
+  const [taskBuffer, setTaskBuffer] = useState(initTaskBuffer as ITask);
   const [tasks, setTasks] = useState([] as ITask[]);
 
   const handleTaskBufferOnChange: (e: any, estimated?: boolean[]) => void = (
@@ -56,9 +49,14 @@ const App: () => JSX.Element = () => {
     setTaskBuffer(cloneTaskBuffer);
   };
 
-  const handleAddNewTaskOnClick: (task: ITask) => void = (task: ITask) => {
+  const handleAddNewTaskOnClick: () => void = () => {
     const cloneTasks: ITask[] = [...tasks];
-    cloneTasks.push(task);
+    const cloneTaskBuffer: ITask = { ...taskBuffer };
+    const timeStamp: number = new Date().getTime();
+    [cloneTaskBuffer.createdOn, cloneTaskBuffer.modifiedOn] = [timeStamp, timeStamp];
+    cloneTasks.push(cloneTaskBuffer);
+    setTasks(cloneTasks);
+    setTaskBuffer(initTaskBuffer);
   };
 
   const handleDashboardToggleOnClick: (dashboardType: enumDashboardType) => void = (
@@ -83,7 +81,7 @@ const App: () => JSX.Element = () => {
   };
   const handleTaskOnClick: (key: number) => void = (key: number) => {
     const cloneTasks: ITask[] = [...tasks];
-    cloneTasks.map(task => {
+    cloneTasks.forEach(task => {
       if (task.createdOn === key) {
         task.isContentOn = !task.isContentOn;
       } else {
