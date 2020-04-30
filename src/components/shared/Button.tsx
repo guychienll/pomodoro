@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 const Wrapper: any = styled.div<{ btnStyle: object }>`
@@ -25,6 +25,17 @@ const Wrapper: any = styled.div<{ btnStyle: object }>`
 `;
 
 const Button: (props: { btnText: string; btnStyle: object; btnAction: any }) => JSX.Element =props => {
+  // const handleActionOnKeyUp: (e: KeyboardEvent) => void = (e: KeyboardEvent): void => {
+  //   if (e.keyCode === 13) {
+  //     props.btnAction();
+  //   }
+  // };
+  // useEffect(() => {
+  //   window.addEventListener("keyup", handleActionOnKeyUp);
+  //   return () => {
+  //     window.removeEventListener("keyup", handleActionOnKeyUp);
+  //   };
+  // }, []);
   return (
     <Wrapper onClick={props.btnAction} btnStyle={props.btnStyle}>
       {props.btnText}

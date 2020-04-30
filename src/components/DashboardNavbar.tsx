@@ -43,7 +43,8 @@ const Tag: any = styled.button<{ tomato: string; arrow: string; isDashboardOn: b
   border-radius: 25px 5px 5px 25px;
   background-color: #fcfcfc;
   display: flex;
-  .tomato {
+  ::after {
+    content: "";
     position: absolute;
     top: 0px;
     left: 0px;
@@ -54,7 +55,8 @@ const Tag: any = styled.button<{ tomato: string; arrow: string; isDashboardOn: b
     background-size: 50%;
     background-repeat: no-repeat;
   }
-  .arrow {
+  ::before {
+    content: "";
     position: absolute;
     top: 0px;
     right: 0px;
@@ -89,28 +91,13 @@ const DashboardNavbar: (props: dashboardNavBarProps) => JSX.Element =props => {
       })}
       <Tag
         isDashboardOn={isDashboardOn}
-        name={enumDashboardToggleType.Tag.toString()}
+        name={enumDashboardToggleType.Tag}
         tomato={TomatoColorfulIcon}
         arrow={ArrowIcon}
         onClick={(e: any) => {
           handleDashboardToggleOnClick(e);
         }}
-      >
-        <button
-          className="tomato"
-          name={enumDashboardToggleType.Tag.toString()}
-          onClick={(e: any) => {
-            handleDashboardToggleOnClick(e);
-          }}
-        />
-        <button
-          className="arrow"
-          name={enumDashboardToggleType.Tag.toString()}
-          onClick={(e: any) => {
-            handleDashboardToggleOnClick(e);
-          }}
-        />
-      </Tag>
+      />
     </Wrapper>
   );
 };

@@ -98,10 +98,10 @@ const App: () => JSX.Element = () => {
           handleDashboardToggleOnClick={handleDashboardToggleOnClick}
         />
         <Dashboard
+          tasks={tasks}
           taskBuffer={taskBuffer}
           dashboards={dashboards}
           isDashboardOn={isDashboardOn}
-          tasks={tasks}
           handleTaskOnClick={handleTaskOnClick}
           handleAddNewTaskOnClick={handleAddNewTaskOnClick}
           handleTaskBufferOnChange={handleTaskBufferOnChange}
