@@ -3,5 +3,4 @@ export type dashboardNavBarProps = {
   dashboards: IDashboard[];
   isDashboardOn: boolean;
   handleDashboardToggleOnClick: any;
-  handleDashboardTagOnClick: any;
 };

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import TomatoColorfulIcon from "../assets/icons/tomato_small_color.svg";
 import ArrowIcon from "../assets/icons/arrow.svg";
 import { dashboardNavBarProps } from "../typeAlias/dashboardNavBarProps";
+import { enumDashboardToggleType } from "./enumDashboardToggleType";
 
 const Wrapper: any = styled.div<{ isDashboardOn: boolean }>`
   min-width: 80px;
@@ -75,7 +76,7 @@ const DashboardNavbar: (props: dashboardNavBarProps) => JSX.Element =props => {
           <Toggle
             key={dashboard.type}
             onClick={() => {
-              props.handleDashboardToggleOnClick(dashboard.type);
+              props.handleDashboardToggleOnClick(enumDashboardToggleType.NavButton, dashboard.type);
             }}
             imgSrc={dashboard.status ? dashboard.toggledSrc : dashboard.untoggledSrc}
           />
@@ -84,7 +85,7 @@ const DashboardNavbar: (props: dashboardNavBarProps) => JSX.Element =props => {
       <Tag
         isDashboardOn={props.isDashboardOn}
         onClick={() => {
-          props.handleDashboardTagOnClick(!props.isDashboardOn);
+          props.handleDashboardToggleOnClick(enumDashboardToggleType.Tag);
         }}
         tomato={TomatoColorfulIcon}
         arrow={ArrowIcon}

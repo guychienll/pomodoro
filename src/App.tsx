@@ -7,6 +7,7 @@ import { ITask } from "./interface/ITask";
 import { IDashboard } from "./interface/IDashboard";
 import { initDashboards } from "./components/initDashboards";
 import { initTaskBuffer } from "./initTaskBuffer";
+import { enumDashboardToggleType } from "./components/enumDashboardToggleType";
 
 const Container: any = styled.div`
   height: 100vh;
@@ -59,26 +60,28 @@ const App: () => JSX.Element = () => {
     setTaskBuffer(initTaskBuffer);
   };
 
-  const handleDashboardToggleOnClick: (dashboardType: enumDashboardType) => void = (
-    dashboardType: enumDashboardType
-  ) => {
-    const dashboardIsOn: IDashboard = dashboards.find(dashboard => dashboard.status === true);
-    if (dashboardIsOn.type === dashboardType) {
+  const handleDashboardToggleOnClick: (
+    dashboardToggleType: enumDashboardToggleType,
+    dashboardType?: enumDashboardType
+  ) => void = (dashboardToggleType: enumDashboardToggleType, dashboardType?: enumDashboardType) => {
+    if (dashboardToggleType === enumDashboardToggleType.Tag) {
+      setIsDashboardOn(!isDashboardOn);
+      return;
+    }
+    const dashboardIsOpened: IDashboard = dashboards.find(dashboard => dashboard.status === true);
+    if (dashboardIsOpened.type === dashboardType) {
       setIsDashboardOn(!isDashboardOn);
     }
-    if (dashboardIsOn.type !== dashboardType && isDashboardOn === false) {
+    if (dashboardIsOpened.type !== dashboardType && isDashboardOn === false) {
       setIsDashboardOn(!isDashboardOn);
     }
     const cloneDashboards: IDashboard[] = [...dashboards];
-    const newDashboards: IDashboard[] = cloneDashboards.map(dashboard => {
+    cloneDashboards.forEach(dashboard => {
       dashboard.type !== dashboardType ? (dashboard.status = false) : (dashboard.status = true);
-      return dashboard;
     });
-    setDashboards(newDashboards);
+    setDashboards(cloneDashboards);
   };
-  const handleDashboardTagOnClick: (toggle: boolean) => void = (toggle: boolean) => {
-    setIsDashboardOn(toggle);
-  };
+
   const handleTaskOnClick: (key: number) => void = (key: number) => {
     const cloneTasks: ITask[] = [...tasks];
     cloneTasks.forEach(task => {
@@ -99,7 +102,6 @@ const App: () => JSX.Element = () => {
           dashboards={dashboards}
           isDashboardOn={isDashboardOn}
           handleDashboardToggleOnClick={handleDashboardToggleOnClick}
-          handleDashboardTagOnClick={handleDashboardTagOnClick}
         />
         <Dashboard
           taskBuffer={taskBuffer}
