@@ -34,7 +34,11 @@ const AddNewTask: (props: addNewTaskProps) => JSX.Element =props => {
           taskBuffer={taskBuffer}
         />
       </FormBox>
-      <Button btnAction={handleAddNewTaskOnClick} btnStyle={{}} btnText={`ADD TASK`} />
+      <Button
+        btnAction={handleAddNewTaskOnClick}
+        btnStyle={{ mainColor: "#ea5548", width: "80%" }}
+        btnText={`ADD TASK`}
+      />
     </Wrapper>
   );
 };

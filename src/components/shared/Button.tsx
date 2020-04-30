@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 
-const Wrapper: any = styled.div<{ btnStyle: object }>`
-  width: 80%;
+const Wrapper: any = styled.button<{ btnStyle: any }>`
+  width: ${props => props.btnStyle.width};
   border-radius: 30px;
   height: 50px;
   font-size: 19px;
@@ -12,19 +12,18 @@ const Wrapper: any = styled.div<{ btnStyle: object }>`
   justify-content: center;
   align-items: center;
   margin-top: 30px;
-  color: #ea5548;
-  border: 3px solid #ea5548;
+  color: ${props => props.btnStyle.mainColor};
+  border: 3px solid ${props => props.btnStyle.mainColor};
   background-color: transparent;
   transition: 0.1s linear;
   :hover {
-    cursor: pointer;
     color: #fcfcfc;
-    border: 3px solid #ea5548;
-    background-color: #ea5548;
+    border: 3px solid ${props => props.btnStyle.mainColor};
+    background-color: ${props => props.btnStyle.mainColor};
   }
 `;
 
-const Button: (props: { btnText: string; btnStyle: object; btnAction: any }) => JSX.Element =props => {
+const Button: (props: { btnText: string; btnStyle: any; btnAction: any }) => JSX.Element =props => {
   // const handleActionOnKeyUp: (e: KeyboardEvent) => void = (e: KeyboardEvent): void => {
   //   if (e.keyCode === 13) {
   //     props.btnAction();
