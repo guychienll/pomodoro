@@ -30,13 +30,13 @@ const TomatoEstimater: (props: {
   const handleTomatosMouseOver: (index: number) => void =index => {
     setEstimatedValueBuffer(index + 1);
   };
-  const handleTomatosMouseOut: (index: number) => void =index => {
+  const handleTomatosMouseOut: (index: number) => void =_index => {
     setEstimatedValueBuffer(0);
   };
   const { estimated } = props.taskBuffer;
   return (
     <Wrapper>
-      {estimated.map((tomato, index) => (
+      {estimated.map((_tomato, index) => (
         <Tomato
           key={index}
           id="estimated"
@@ -48,7 +48,7 @@ const TomatoEstimater: (props: {
           }}
           onClick={e => {
             let cloneEstimated: boolean[] = [...estimated];
-            cloneEstimated = cloneEstimated.map((e, i) => (i <= index ? true : false));
+            cloneEstimated = cloneEstimated.map((_e, i) => (i <= index ? true : false));
             props.handleTaskBufferOnChange(e, cloneEstimated);
           }}
           tomatoStatus={

@@ -6,8 +6,8 @@ import { enumDashboardType } from "./enum/enumDashboardType";
 import { ITask } from "./interface/ITask";
 import { IDashboard } from "./interface/IDashboard";
 import { initDashboards } from "./components/initDashboards";
-import { initTaskBuffer } from "./initTaskBuffer";
-import { enumDashboardToggleType } from "./components/enumDashboardToggleType";
+import { initTaskBuffer } from "./components/task/initTaskBuffer";
+import { enumDashboardToggleType } from "./enum/enumDashboardToggleType";
 
 const Container: any = styled.div`
   height: 100vh;

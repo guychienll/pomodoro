@@ -1,5 +1,5 @@
-import { ITask } from "./interface/ITask";
-import { enumTaskStatus } from "./enum/enumTaskStatus";
+import { ITask } from "../../interface/ITask";
+import { enumTaskStatus } from "../../enum/enumTaskStatus";
 export const initTaskBuffer: ITask = {
   name: "",
   estimated: [false, false, false, false, false, false, false, false, false, false],
