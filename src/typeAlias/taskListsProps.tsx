@@ -4,4 +4,5 @@ export type taskListsProps = {
   tasks: ITask[];
   handleTaskOnClick: any;
   handleTaskBufferOnChange: any;
+  taskBuffer: ITask;
 };

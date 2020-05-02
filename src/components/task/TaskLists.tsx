@@ -168,11 +168,9 @@ const TaskLists: (props: taskListsProps) => JSX.Element = (props: taskListsProps
                   <Title>
                     <div className="name">{sortedTask.name}</div>
                     <div className="tomatos">
-                      {Array.from({ length: sortedTask.point }, (_v, i) => i).map(
-                        (_tomato, index) => (
-                          <div key={index} className="tomato" />
-                        )
-                      )}
+                      {Array.from({ length: sortedTask.point }, (_v, i) => i).map((_tomato, index) => (
+                        <div key={index} className="tomato" />
+                      ))}
                     </div>
                   </Title>
                 }
@@ -183,15 +181,17 @@ const TaskLists: (props: taskListsProps) => JSX.Element = (props: taskListsProps
                     <FormBox title="TASK TITLE">
                       <input
                         name="name"
-                        value={sortedTask.name}
-                        onChange={props.handleTaskBufferOnChange}
+                        value={props.taskBuffer.name}
+                        onChange={e => {
+                          props.handleTaskBufferOnChange(e);
+                        }}
                         type="text"
                         placeholder="Plz Enter your task ..."
                       />
                     </FormBox>
                     <FormBox title="ESTIMATED TOMOTO">
                       <TomatoEstimater
-                        taskBuffer={sortedTask}
+                        taskBuffer={props.taskBuffer}
                         handleTaskBufferOnChange={props.handleTaskBufferOnChange}
                       />
                     </FormBox>

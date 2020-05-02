@@ -17,7 +17,7 @@ const Container: any = styled.div`
   display: flex;
 `;
 const TimerWrapper: any = styled.div<{ isDashboardOn: boolean }>`
-  width: ${(props) => {
+  width: ${props => {
     return props.isDashboardOn === true ? "calc(65% - 80px)" : "calc(100% - 80px)";
   }};
   background-color: #eaeaea;
@@ -25,7 +25,7 @@ const TimerWrapper: any = styled.div<{ isDashboardOn: boolean }>`
   transition: 0.3s ease-in-out;
 `;
 const DashboardWrapper: any = styled.div<{ isDashboardOn: boolean }>`
-  width: ${(props) => {
+  width: ${props => {
     return props.isDashboardOn === true ? "calc(35% + 80px)" : "80px";
   }};
   height: 100%;
@@ -41,7 +41,7 @@ const App: () => JSX.Element = () => {
     {
       name: "demo task 1",
       point: 5,
-      isContentOn: true,
+      isContentOn: false,
       status: enumTaskStatus.Todo,
       createdOn: 11111,
       modifiedOn: 11111,
@@ -84,11 +84,19 @@ const App: () => JSX.Element = () => {
     e: any,
     dashboardType?: enumDashboardType
   ) => {
+    // initial state start
+    const cloneTasks: ITask[] = [...tasks].map(task => {
+      task.isContentOn = false;
+      return task;
+    });
+    setTasks(cloneTasks);
+    setTaskBuffer(initTaskBuffer);
+    // initial state end
     if (e.target.name === enumDashboardToggleType.Tag) {
       setIsDashboardOn(!isDashboardOn);
       return;
     }
-    const dashboardIsOpened: IDashboard = dashboards.find((dashboard) => dashboard.status === true);
+    const dashboardIsOpened: IDashboard = dashboards.find(dashboard => dashboard.status === true);
     if (dashboardIsOpened.type === dashboardType) {
       setIsDashboardOn(!isDashboardOn);
     }
@@ -96,7 +104,7 @@ const App: () => JSX.Element = () => {
       setIsDashboardOn(!isDashboardOn);
     }
     const cloneDashboards: IDashboard[] = [...dashboards];
-    cloneDashboards.forEach((dashboard) => {
+    cloneDashboards.forEach(dashboard => {
       dashboard.type !== dashboardType ? (dashboard.status = false) : (dashboard.status = true);
     });
     setDashboards(cloneDashboards);
@@ -104,13 +112,17 @@ const App: () => JSX.Element = () => {
 
   const handleTaskOnClick: (key: number) => void = (key: number) => {
     const cloneTasks: ITask[] = [...tasks];
-    cloneTasks.forEach((task) => {
+    const cloneTask: ITask = cloneTasks.find(task => {
+      return task.createdOn === key;
+    });
+    cloneTasks.forEach(task => {
       if (task.createdOn === key) {
         task.isContentOn = !task.isContentOn;
       } else {
         task.isContentOn = false;
       }
     });
+    setTaskBuffer(cloneTask);
     setTasks(cloneTasks);
   };
 

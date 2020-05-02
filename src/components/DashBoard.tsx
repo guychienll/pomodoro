@@ -29,8 +29,7 @@ const DashboardTitle: any = styled.div`
 `;
 
 const Dashboard: (props: dashboardProps) => JSX.Element =props => {
-  const { name: currentName, type: currentType }: IDashboard = props.dashboards.find(db => db.status === true
-  );
+  const { name: currentName, type: currentType }: IDashboard = props.dashboards.find(db => db.status === true);
   const {
     taskBuffer,
     handleAddNewTaskOnClick,
@@ -54,9 +53,10 @@ const Dashboard: (props: dashboardProps) => JSX.Element =props => {
     [
       enumDashboardType.TaskLists,
       <TaskLists
-        handleTaskBufferOnChange={props.handleTaskBufferOnChange}
+        handleTaskBufferOnChange={handleTaskBufferOnChange}
         handleTaskOnClick={handleTaskOnClick}
         tasks={tasks}
+        taskBuffer={taskBuffer}
       >
         <DashboardTitle>{currentName}</DashboardTitle>
       </TaskLists>,

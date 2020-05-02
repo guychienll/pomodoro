@@ -23,10 +23,7 @@ const Tomato = styled.button<{ tomatoStatus: string }>`
   }
 `;
 
-const TomatoEstimater: (props: {
-  taskBuffer: ITask;
-  handleTaskBufferOnChange: any;
-}) => JSX.Element =props => {
+const TomatoEstimater: (props: { taskBuffer: ITask; handleTaskBufferOnChange: any }) => JSX.Element =props => {
   const tomatos: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const [estimatedValueBuffer, setEstimatedValueBuffer] = useState(0);
   const handleTomatosMouseOver: (value: number) => void =value => {
@@ -52,11 +49,7 @@ const TomatoEstimater: (props: {
             onClick={e => {
               props.handleTaskBufferOnChange(e);
             }}
-            tomatoStatus={
-              props.taskBuffer.point >= value || estimatedValueBuffer >= value
-                ? tomatoColor
-                : tomatoGray
-            }
+            tomatoStatus={props.taskBuffer.point >= value || estimatedValueBuffer >= value ? tomatoColor : tomatoGray}
           />
         );
       })}
