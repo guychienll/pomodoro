@@ -53,7 +53,11 @@ const Dashboard: (props: dashboardProps) => JSX.Element =props => {
     ],
     [
       enumDashboardType.TaskLists,
-      <TaskLists handleTaskOnClick={handleTaskOnClick} tasks={tasks}>
+      <TaskLists
+        handleTaskBufferOnChange={props.handleTaskBufferOnChange}
+        handleTaskOnClick={handleTaskOnClick}
+        tasks={tasks}
+      >
         <DashboardTitle>{currentName}</DashboardTitle>
       </TaskLists>,
     ],

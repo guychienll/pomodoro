@@ -3,4 +3,5 @@ export type taskListsProps = {
   children: any;
   tasks: ITask[];
   handleTaskOnClick: any;
+  handleTaskBufferOnChange: any;
 };

@@ -7,6 +7,7 @@ import tomatoColor from "../../assets/icons/tomato_small_color.svg";
 import FormBox from "./FormBox";
 import { taskListsProps } from "../../typeAlias/taskListsProps";
 import Button from "../shared/Button";
+import TomatoEstimater from "./TomatoEstimater";
 const Wrapper = styled.div`
   width: 100%;
   display: flex;
@@ -40,7 +41,6 @@ const Tab = styled.div<{ currentStatus: enumTaskStatus; tabType: enumTaskStatus 
     cursor: pointer;
   }
 `;
-
 const HeaderIcon = styled.div<{ isContentOn: boolean }>`
   background-image: url(${tomatoColor});
   background-repeat: no-repeat;
@@ -62,7 +62,6 @@ const Task = styled.div`
   justify-content: flex-start;
   margin-top: 1px;
 `;
-
 const Title = styled.div`
   width: calc(100% / 3.5);
   min-width: 120px;
@@ -75,23 +74,23 @@ const Title = styled.div`
     font-family: Lato;
     width: 100%;
   }
-  .estimated {
+  .tomatos {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     width: 100%;
-    .dot {
+    .tomato {
       background-color: #ea5548;
       border-radius: 100%;
       width: 10px;
       height: 10px;
-      margin-right: auto;
+      margin-right: 5px;
     }
   }
 `;
 const Content = styled.div<{ isContentOn: boolean }>`
   width: 80%;
-  height: ${props => (props.isContentOn ? "380px" : "0")};
+  height: ${props => (props.isContentOn ? "310px" : "0")};
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
@@ -121,47 +120,12 @@ const NoDatas = styled.div`
   margin-top: 30px;
 `;
 
-const TaskLists = (props: taskListsProps) => {
+const TaskLists: (props: taskListsProps) => JSX.Element = (props: taskListsProps) => {
   const [tabStatus, setTabStatus] = useState(enumTaskStatus.Todo);
-  const handleTabStatusOnClick = (tabType: enumTaskStatus) => {
+  const handleTabStatusOnClick: (tabType: enumTaskStatus) => void = (tabType: enumTaskStatus) => {
     setTabStatus(tabType);
   };
 
-  const ContentByTaskTypeMap: Map<enumTaskStatus, JSX.Element> = new Map([
-    [
-      enumTaskStatus.Todo,
-      <FormGroup>
-        <FormBox title="TASK TITLE">
-          <input type="text" placeholder="My Second Task" />
-        </FormBox>
-        <FormBox title="ESTIMATED TOMOTO">{/* <TomatoEstimater /> */}</FormBox>
-        <BtnGroup>
-          <Button
-            btnStyle={{
-              mainColor: "#7f7f7f",
-              width: "30%",
-            }}
-            btnText="Archive"
-            btnAction={() => {
-              "acchive";
-            }}
-          />
-          <Button
-            btnStyle={{
-              mainColor: "#ea5548",
-              width: "50%",
-            }}
-            btnText="SAVE"
-            btnAction={() => {
-              console.log("save");
-            }}
-          />
-        </BtnGroup>
-      </FormGroup>,
-    ],
-    [enumTaskStatus.Done, null],
-    [enumTaskStatus.Archieve, null],
-  ]);
   return (
     <Wrapper>
       {props.children}
@@ -197,16 +161,60 @@ const TaskLists = (props: taskListsProps) => {
                 title={
                   <Title>
                     <div className="name">{sortedTask.name}</div>
-                    <div className="estimated">
-                      {[1, 2, 3, 4, 5, 6, 7, 8].map((dot, index) => {
-                        return <div key={index} className="dot"></div>;
-                      })}
+                    <div className="tomatos">
+                      {Array.from({ length: sortedTask.point }, (_v, i) => i).map(
+                        (_tomato, index) => (
+                          <div key={index} className="tomato" />
+                        )
+                      )}
                     </div>
                   </Title>
                 }
               />
               <Content isContentOn={sortedTask.isContentOn}>
-                {ContentByTaskTypeMap.get(sortedTask.status)}
+                {tabStatus === enumTaskStatus.Todo && (
+                  <FormGroup>
+                    <FormBox title="TASK TITLE">
+                      <input
+                        name="name"
+                        value={sortedTask.name}
+                        onChange={props.handleTaskBufferOnChange}
+                        type="text"
+                        placeholder="Plz Enter your task ..."
+                      />
+                    </FormBox>
+                    <FormBox title="ESTIMATED TOMOTO">
+                      <TomatoEstimater
+                        taskBuffer={sortedTask}
+                        handleTaskBufferOnChange={props.handleTaskBufferOnChange}
+                      />
+                    </FormBox>
+                    <BtnGroup>
+                      <Button
+                        btnStyle={{
+                          mainColor: "#7f7f7f",
+                          width: "30%",
+                        }}
+                        btnText="Archive"
+                        btnAction={() => {
+                          "acchive";
+                        }}
+                      />
+                      <Button
+                        btnStyle={{
+                          mainColor: "#ea5548",
+                          width: "50%",
+                        }}
+                        btnText="SAVE"
+                        btnAction={() => {
+                          console.log("save");
+                        }}
+                      />
+                    </BtnGroup>
+                  </FormGroup>
+                )}
+                {tabStatus === enumTaskStatus.Done && null}
+                {tabStatus === enumTaskStatus.Archieve && null}
               </Content>
             </Task>
           ))
@@ -215,10 +223,6 @@ const TaskLists = (props: taskListsProps) => {
       )}
     </Wrapper>
   );
-};
-
-TaskLists.prototype = {
-  tasks: PropTypes.array,
 };
 
 export default TaskLists;
