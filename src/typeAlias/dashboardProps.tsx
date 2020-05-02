@@ -8,4 +8,5 @@ export type dashboardProps = {
   handleAddNewTaskOnClick: any;
   taskBuffer: ITask;
   handleTaskBufferOnChange: any;
+  handleUpdateTaskOnClick: any;
 };

@@ -212,8 +212,8 @@ const TaskLists: (props: taskListsProps) => JSX.Element = (props: taskListsProps
                           width: "50%",
                         }}
                         btnText="SAVE"
-                        btnAction={() => {
-                          console.log("save");
+                        btnAction={e => {
+                          props.handleUpdateTaskOnClick(e, props.taskBuffer.createdOn);
                         }}
                       />
                     </BtnGroup>
