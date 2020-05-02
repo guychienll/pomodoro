@@ -11,7 +11,7 @@ const Wrapper: any = styled.button<{ btnStyle: any }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px 0;
+  margin: 10px;
   color: ${props => props.btnStyle.mainColor};
   border: 3px solid ${props => props.btnStyle.mainColor};
   background-color: transparent;

@@ -88,12 +88,27 @@ const Title = styled.div`
     }
   }
 `;
-const Content = styled.div<{ isContentOn: boolean }>`
+const Content = styled.div<{ isContentOn: boolean; tabStatus: enumTaskStatus }>`
   width: 80%;
-  height: ${props => (props.isContentOn ? "310px" : "0")};
+  height: ${props => {
+    const { isContentOn, tabStatus } = props;
+    if (isContentOn) {
+      switch (tabStatus) {
+        case enumTaskStatus.Todo:
+          return "310px";
+        case enumTaskStatus.Done:
+          return "310px";
+        case enumTaskStatus.Archieve:
+          return "70px";
+        default:
+          return "0xp";
+      }
+    }
+    return "0px";
+  }};
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   background-color: #414141;
   transition: all 0.1s ease-in-out;
   overflow: hidden;
@@ -106,10 +121,10 @@ const FormGroup = styled.div`
   justify-content: flex-start;
 `;
 const BtnGroup = styled.div`
-  width: 80%;
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
 `;
 const NoDatas = styled.div`
   width: 80%;
@@ -175,7 +190,7 @@ const TaskLists: (props: taskListsProps) => JSX.Element = (props: taskListsProps
                   </Title>
                 }
               />
-              <Content isContentOn={sortedTask.isContentOn}>
+              <Content isContentOn={sortedTask.isContentOn} tabStatus={tabStatus}>
                 {tabStatus === enumTaskStatus.Todo && (
                   <FormGroup>
                     <FormBox title="TASK TITLE">
@@ -220,7 +235,20 @@ const TaskLists: (props: taskListsProps) => JSX.Element = (props: taskListsProps
                   </FormGroup>
                 )}
                 {tabStatus === enumTaskStatus.Done && null}
-                {tabStatus === enumTaskStatus.Archieve && null}
+                {tabStatus === enumTaskStatus.Archieve && (
+                  <BtnGroup>
+                    <Button
+                      btnStyle={{
+                        mainColor: "#7f7f7f",
+                        width: "100%",
+                      }}
+                      btnText="UnArchive"
+                      btnAction={e => {
+                        props.handleArchiveTaskOnClick(e, props.taskBuffer.createdOn, true);
+                      }}
+                    />
+                  </BtnGroup>
+                )}
               </Content>
             </Task>
           ))

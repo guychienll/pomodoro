@@ -91,11 +91,15 @@ const App: () => JSX.Element = () => {
     setTasks(cloneTasks);
   };
 
-  const handleArchiveTaskOnClick: (e: any, taskId: number) => void = (e: any, taskId: number) => {
+  const handleArchiveTaskOnClick: (e: any, taskId: number, isUnArchive: boolean) => void = (
+    e: any,
+    taskId: number,
+    isUnArchive: boolean = false
+  ) => {
     const cloneTasks: ITask[] = [...tasks];
     cloneTasks.forEach(task => {
       if (task.createdOn === taskId) {
-        task.status = enumTaskStatus.Archieve;
+        isUnArchive ? (task.status = enumTaskStatus.Todo) : (task.status = enumTaskStatus.Archieve);
         task.isContentOn = false;
       }
     });
