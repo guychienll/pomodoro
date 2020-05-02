@@ -9,6 +9,7 @@ import { initDashboards } from "./components/initDashboards";
 import { initTaskBuffer } from "./components/task/initTaskBuffer";
 import { enumDashboardToggleType } from "./enum/enumDashboardToggleType";
 import { enumTaskStatus } from "./enum/enumTaskStatus";
+import Timer from "./components/timer/Timer";
 
 const Container: any = styled.div`
   height: 100vh;
@@ -23,6 +24,8 @@ const TimerWrapper: any = styled.div<{ isDashboardOn: boolean }>`
   background-color: #eaeaea;
   height: 100%;
   transition: 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
 `;
 const DashboardWrapper: any = styled.div<{ isDashboardOn: boolean }>`
   width: ${props => {
@@ -155,7 +158,9 @@ const App: () => JSX.Element = () => {
 
   return (
     <Container>
-      <TimerWrapper isDashboardOn={isDashboardOn} />
+      <TimerWrapper isDashboardOn={isDashboardOn}>
+        <Timer taskBuffer={tasks[0]}></Timer>
+      </TimerWrapper>
       <DashboardWrapper isDashboardOn={isDashboardOn}>
         <DashboardNavbar
           dashboards={dashboards}

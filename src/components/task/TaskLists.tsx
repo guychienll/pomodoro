@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import List from "../shared/List";
-import PropTypes from "prop-types";
 import { enumTaskStatus } from "src/enum/enumTaskStatus";
 import tomatoColor from "../../assets/icons/tomato_small_color.svg";
 import FormBox from "./FormBox";
