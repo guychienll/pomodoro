@@ -8,6 +8,7 @@ import { IDashboard } from "./interface/IDashboard";
 import { initDashboards } from "./components/initDashboards";
 import { initTaskBuffer } from "./components/task/initTaskBuffer";
 import { enumDashboardToggleType } from "./enum/enumDashboardToggleType";
+import { enumTaskStatus } from "./enum/enumTaskStatus";
 
 const Container: any = styled.div`
   height: 100vh;
@@ -36,7 +37,32 @@ const App: () => JSX.Element = () => {
   const [isDashboardOn, setIsDashboardOn] = useState(true as boolean);
   const [dashboards, setDashboards] = useState(initDashboards as IDashboard[]);
   const [taskBuffer, setTaskBuffer] = useState(initTaskBuffer as ITask);
-  const [tasks, setTasks] = useState([] as ITask[]);
+  const [tasks, setTasks] = useState([
+    {
+      name: "demo task 1",
+      point: 5,
+      isContentOn: true,
+      status: enumTaskStatus.Todo,
+      createdOn: 11111,
+      modifiedOn: 11111,
+    },
+    {
+      name: "demo task 2",
+      point: 7,
+      isContentOn: false,
+      status: enumTaskStatus.Todo,
+      createdOn: 22222,
+      modifiedOn: 22222,
+    },
+    {
+      name: "demo task 3",
+      point: 3,
+      isContentOn: false,
+      status: enumTaskStatus.Todo,
+      createdOn: 33333,
+      modifiedOn: 33333,
+    },
+  ] as ITask[]);
 
   const handleTaskBufferOnChange: (e: any) => void = (e: any) => {
     const cloneTaskBuffer: ITask = { ...taskBuffer };

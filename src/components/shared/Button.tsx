@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const Wrapper: any = styled.button<{ btnStyle: any }>`
@@ -24,6 +24,7 @@ const Wrapper: any = styled.button<{ btnStyle: any }>`
 `;
 
 const Button: (props: { btnText: string; btnStyle: any; btnAction: any }) => JSX.Element =props => {
+  // TODO: not to know why it add is null
   // const handleActionOnKeyUp: (e: KeyboardEvent) => void = (e: KeyboardEvent): void => {
   //   if (e.keyCode === 13) {
   //     props.btnAction();

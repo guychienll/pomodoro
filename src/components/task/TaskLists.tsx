@@ -6,6 +6,7 @@ import { enumTaskStatus } from "src/enum/enumTaskStatus";
 import tomatoColor from "../../assets/icons/tomato_small_color.svg";
 import FormBox from "./FormBox";
 import { taskListsProps } from "../../typeAlias/taskListsProps";
+import Button from "../shared/Button";
 const Wrapper = styled.div`
   width: 100%;
   display: flex;
@@ -109,7 +110,7 @@ const BtnGroup = styled.div`
   width: 80%;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-evenly;
 `;
 const NoDatas = styled.div`
   width: 80%;
@@ -135,8 +136,26 @@ const TaskLists = (props: taskListsProps) => {
         </FormBox>
         <FormBox title="ESTIMATED TOMOTO">{/* <TomatoEstimater /> */}</FormBox>
         <BtnGroup>
-          {/* <Button btnStyle={{}} btnText="Archive" />
-          <Button btnStyle={{}} btnText="SAVE" /> */}
+          <Button
+            btnStyle={{
+              mainColor: "#7f7f7f",
+              width: "30%",
+            }}
+            btnText="Archive"
+            btnAction={() => {
+              "acchive";
+            }}
+          />
+          <Button
+            btnStyle={{
+              mainColor: "#ea5548",
+              width: "50%",
+            }}
+            btnText="SAVE"
+            btnAction={() => {
+              console.log("save");
+            }}
+          />
         </BtnGroup>
       </FormGroup>,
     ],

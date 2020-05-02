@@ -11,14 +11,14 @@ import { IDashboard } from "../interface/IDashboard";
 export const initDashboards: IDashboard[] = [
   {
     type: enumDashboardType.AddNewTask,
-    status: true,
+    status: false,
     name: "ADD NEW TASK",
     toggledSrc: AddToggledIcon,
     untoggledSrc: AddUntoggledIcon,
   } as IDashboard,
   {
     type: enumDashboardType.TaskLists,
-    status: false,
+    status: true,
     name: "TASK LISTS",
     toggledSrc: ListToggledIcon,
     untoggledSrc: ListUntoggledIcon,
