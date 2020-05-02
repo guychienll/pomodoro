@@ -202,8 +202,8 @@ const TaskLists: (props: taskListsProps) => JSX.Element = (props: taskListsProps
                           width: "30%",
                         }}
                         btnText="Archive"
-                        btnAction={() => {
-                          "acchive";
+                        btnAction={e => {
+                          props.handleArchiveTaskOnClick(e, props.taskBuffer.createdOn);
                         }}
                       />
                       <Button

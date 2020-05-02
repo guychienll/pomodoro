@@ -79,10 +79,7 @@ const App: () => JSX.Element = () => {
     setTasks(cloneTasks);
     setTaskBuffer(initTaskBuffer);
   };
-  const handleUpdateTaskOnClick: (e: any, taskId: number) => void = (e: any, taskId: number = 0) => {
-    if (taskId === 0) {
-      return;
-    }
+  const handleUpdateTaskOnClick: (e: any, taskId: number) => void = (e: any, taskId: number) => {
     const cloneTasks: ITask[] = [...tasks];
     cloneTasks.forEach(task => {
       if (task.createdOn === taskId) {
@@ -94,6 +91,16 @@ const App: () => JSX.Element = () => {
     setTasks(cloneTasks);
   };
 
+  const handleArchiveTaskOnClick: (e: any, taskId: number) => void = (e: any, taskId: number) => {
+    const cloneTasks: ITask[] = [...tasks];
+    cloneTasks.forEach(task => {
+      if (task.createdOn === taskId) {
+        task.status = enumTaskStatus.Archieve;
+        task.isContentOn = false;
+      }
+    });
+    setTasks(cloneTasks);
+  };
   const handleDashboardToggleOnClick: (e: any, dashboardType?: enumDashboardType) => void = (
     e: any,
     dashboardType?: enumDashboardType
@@ -158,6 +165,7 @@ const App: () => JSX.Element = () => {
           handleAddNewTaskOnClick={handleAddNewTaskOnClick}
           handleTaskBufferOnChange={handleTaskBufferOnChange}
           handleUpdateTaskOnClick={handleUpdateTaskOnClick}
+          handleArchiveTaskOnClick={handleArchiveTaskOnClick}
         />
       </DashboardWrapper>
     </Container>
