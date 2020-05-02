@@ -157,7 +157,13 @@ const TaskLists: (props: taskListsProps) => JSX.Element = (props: taskListsProps
                 primaryKey={sortedTask.createdOn}
                 handleTaskOnClick={props.handleTaskOnClick}
                 headerIcon={<HeaderIcon isContentOn={sortedTask.isContentOn} />}
-                actionBtn={<i className="fas fa-ellipsis-h fa-lg"></i>}
+                actionBtn={
+                  sortedTask.isContentOn ? (
+                    <i className="fas fa-ellipsis-v fa-lg" />
+                  ) : (
+                    <i className="fas fa-ellipsis-h fa-lg" />
+                  )
+                }
                 title={
                   <Title>
                     <div className="name">{sortedTask.name}</div>
