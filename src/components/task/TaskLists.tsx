@@ -97,7 +97,6 @@ const Content = styled.div<{ isContentOn: boolean; tabStatus: enumTaskStatus }>`
         case enumTaskStatus.Todo:
           return "310px";
         case enumTaskStatus.Done:
-          return "310px";
         case enumTaskStatus.Archieve:
           return "70px";
         default:
@@ -234,7 +233,30 @@ const TaskLists: (props: taskListsProps) => JSX.Element = (props: taskListsProps
                     </BtnGroup>
                   </FormGroup>
                 )}
-                {tabStatus === enumTaskStatus.Done && null}
+                {tabStatus === enumTaskStatus.Done && (
+                  <BtnGroup>
+                    <Button
+                      btnStyle={{
+                        mainColor: "#7f7f7f",
+                        width: "30%",
+                      }}
+                      btnText="Archive"
+                      btnAction={e => {
+                        props.handleArchiveTaskOnClick(e, props.taskBuffer.createdOn);
+                      }}
+                    />
+                    <Button
+                      btnStyle={{
+                        mainColor: "#ea5548",
+                        width: "50%",
+                      }}
+                      btnText="Redo"
+                      btnAction={e => {
+                        props.handleArchiveTaskOnClick(e, props.taskBuffer.createdOn, true);
+                      }}
+                    />
+                  </BtnGroup>
+                )}
                 {tabStatus === enumTaskStatus.Archieve && (
                   <BtnGroup>
                     <Button

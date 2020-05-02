@@ -58,7 +58,7 @@ const App: () => JSX.Element = () => {
       name: "demo task 3",
       point: 3,
       isContentOn: false,
-      status: enumTaskStatus.Todo,
+      status: enumTaskStatus.Done,
       createdOn: 33333,
       modifiedOn: 33333,
     },
@@ -86,6 +86,7 @@ const App: () => JSX.Element = () => {
         Object.keys(task).forEach(key => {
           task[key] = taskBuffer[key];
         });
+        task.modifiedOn = new Date().getTime();
       }
     });
     setTasks(cloneTasks);
@@ -100,6 +101,7 @@ const App: () => JSX.Element = () => {
     cloneTasks.forEach(task => {
       if (task.createdOn === taskId) {
         isUnArchive ? (task.status = enumTaskStatus.Todo) : (task.status = enumTaskStatus.Archieve);
+        task.modifiedOn = new Date().getTime();
         task.isContentOn = false;
       }
     });
