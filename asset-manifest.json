@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/pomodoro/static/css/main.d2ce1a55.chunk.css",
-    "main.js": "/pomodoro/static/js/main.c463bdae.chunk.js",
-    "main.js.map": "/pomodoro/static/js/main.c463bdae.chunk.js.map",
+    "main.js": "/pomodoro/static/js/main.d367e3cb.chunk.js",
+    "main.js.map": "/pomodoro/static/js/main.d367e3cb.chunk.js.map",
     "runtime-main.js": "/pomodoro/static/js/runtime-main.5f33536a.js",
     "runtime-main.js.map": "/pomodoro/static/js/runtime-main.5f33536a.js.map",
-    "static/js/2.a6e8c945.chunk.js": "/pomodoro/static/js/2.a6e8c945.chunk.js",
-    "static/js/2.a6e8c945.chunk.js.map": "/pomodoro/static/js/2.a6e8c945.chunk.js.map",
+    "static/js/2.07728851.chunk.js": "/pomodoro/static/js/2.07728851.chunk.js",
+    "static/js/2.07728851.chunk.js.map": "/pomodoro/static/js/2.07728851.chunk.js.map",
     "index.html": "/pomodoro/index.html",
-    "precache-manifest.e58e12fcb9d1f0a0d2f28f86d2070c86.js": "/pomodoro/precache-manifest.e58e12fcb9d1f0a0d2f28f86d2070c86.js",
+    "precache-manifest.aedba6bf9f42a633129891063086acc2.js": "/pomodoro/precache-manifest.aedba6bf9f42a633129891063086acc2.js",
     "service-worker.js": "/pomodoro/service-worker.js",
     "static/css/main.d2ce1a55.chunk.css.map": "/pomodoro/static/css/main.d2ce1a55.chunk.css.map",
-    "static/js/2.a6e8c945.chunk.js.LICENSE.txt": "/pomodoro/static/js/2.a6e8c945.chunk.js.LICENSE.txt",
+    "static/js/2.07728851.chunk.js.LICENSE.txt": "/pomodoro/static/js/2.07728851.chunk.js.LICENSE.txt",
     "static/media/add_red.svg": "/pomodoro/static/media/add_red.30013910.svg",
     "static/media/add_white.svg": "/pomodoro/static/media/add_white.32e0817a.svg",
     "static/media/analysis_red.svg": "/pomodoro/static/media/analysis_red.1998e7ea.svg",
@@ -26,8 +26,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.5f33536a.js",
-    "static/js/2.a6e8c945.chunk.js",
+    "static/js/2.07728851.chunk.js",
     "static/css/main.d2ce1a55.chunk.css",
-    "static/js/main.c463bdae.chunk.js"
+    "static/js/main.d367e3cb.chunk.js"
   ]
 }
