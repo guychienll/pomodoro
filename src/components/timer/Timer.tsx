@@ -29,6 +29,25 @@ const Header = styled.div`
     font-size: 29px;
     font-weight: bold;
   }
+  .tomatos {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    .tomato,
+    .unDoneTomato {
+      border: 1px solid #ea5548;
+      border-radius: 100%;
+      width: 10px;
+      height: 10px;
+      margin-right: 5px;
+    }
+    .tomato {
+      background-color: #ea5548;
+    }
+    .unDoneTomato {
+      background-color: transparent;
+    }
+  }
 `;
 
 const Main = styled.div``;
@@ -57,14 +76,47 @@ const Timer: (props: timerProps) => JSX.Element = (props: timerProps) => {
     <Wrapper>
       <Header>
         <div className="name">{props.taskBuffer.name}</div>
-        {/* TODO: shold has a compoent to replace this points group */}
+        <div className="tomatos">
+          {Array.from({ length: props.taskBuffer.pointHasDone }, (_v, i) => i).map((_tomato, index) => (
+            <div key={index} className="tomato" />
+          ))}
+          {Array.from({ length: props.taskBuffer.point - props.taskBuffer.pointHasDone }, (_v, i) => i).map(
+            (_tomato, index) => (
+              <div key={index} className="unDoneTomato" />
+            )
+          )}
+        </div>
       </Header>
       <Main>
         <Clock></Clock>
         <ButtonGroup>
-          <Button btnText={">"} btnAction={{}} btnStyle={{ mainColor: "#EA5548", width: "13%" }}></Button>
-          <Button btnText={"="} btnAction={{}} btnStyle={{ mainColor: "#EA5548", width: "13%" }}></Button>
-          <Button btnText={"@"} btnAction={{}} btnStyle={{ mainColor: "#EA5548", width: "13%" }}></Button>
+          <Button
+            btnText=""
+            btnAction={() => {
+              console.log("start");
+            }}
+            btnStyle={{ mainColor: "#EA5548", width: "50px" }}
+          >
+            <i className="fas fa-play"></i>
+          </Button>
+          <Button
+            btnText=""
+            btnAction={() => {
+              console.log("stop");
+            }}
+            btnStyle={{ mainColor: "#EA5548", width: "50px" }}
+          >
+            <i className="fas fa-stop"></i>
+          </Button>
+          <Button
+            btnText=""
+            btnAction={() => {
+              console.log("reset");
+            }}
+            btnStyle={{ mainColor: "#EA5548", width: "50px" }}
+          >
+            <i className="fas fa-redo"></i>
+          </Button>
         </ButtonGroup>
         <TaskStatus>TASK COMPLETE</TaskStatus>
       </Main>

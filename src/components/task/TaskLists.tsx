@@ -78,12 +78,19 @@ const Title = styled.div`
     align-items: center;
     justify-content: flex-start;
     width: 100%;
-    .tomato {
-      background-color: #ea5548;
+    .tomato,
+    .unDoneTomato {
+      border: 1px solid #ea5548;
       border-radius: 100%;
       width: 10px;
       height: 10px;
       margin-right: 5px;
+    }
+    .tomato {
+      background-color: #ea5548;
+    }
+    .unDoneTomato {
+      background-color: transparent;
     }
   }
 `;
@@ -181,9 +188,14 @@ const TaskLists: (props: taskListsProps) => JSX.Element = (props: taskListsProps
                   <Title>
                     <div className="name">{sortedTask.name}</div>
                     <div className="tomatos">
-                      {Array.from({ length: sortedTask.point }, (_v, i) => i).map((_tomato, index) => (
+                      {Array.from({ length: sortedTask.pointHasDone }, (_v, i) => i).map((_tomato, index) => (
                         <div key={index} className="tomato" />
                       ))}
+                      {Array.from({ length: sortedTask.point - sortedTask.pointHasDone }, (_v, i) => i).map(
+                        (_tomato, index) => (
+                          <div key={index} className="unDoneTomato" />
+                        )
+                      )}
                     </div>
                   </Title>
                 }

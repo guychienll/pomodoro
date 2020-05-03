@@ -44,6 +44,7 @@ const App: () => JSX.Element = () => {
     {
       name: "demo task 1",
       point: 5,
+      pointHasDone: 2,
       isContentOn: false,
       status: enumTaskStatus.Todo,
       createdOn: 11111,
@@ -52,6 +53,7 @@ const App: () => JSX.Element = () => {
     {
       name: "demo task 2",
       point: 7,
+      pointHasDone: 2,
       isContentOn: false,
       status: enumTaskStatus.Todo,
       createdOn: 22222,
@@ -60,6 +62,7 @@ const App: () => JSX.Element = () => {
     {
       name: "demo task 3",
       point: 3,
+      pointHasDone: 3,
       isContentOn: false,
       status: enumTaskStatus.Done,
       createdOn: 33333,

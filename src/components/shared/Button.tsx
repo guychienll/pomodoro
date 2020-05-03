@@ -23,7 +23,14 @@ const Wrapper: any = styled.button<{ btnStyle: any }>`
   }
 `;
 
-const Button: (props: { btnText: string; btnStyle: any; btnAction: any }) => JSX.Element =props => {
+type buttonProps = {
+  btnText: string;
+  btnStyle: any;
+  btnAction: any;
+  children?: JSX.Element;
+};
+
+const Button: (props: buttonProps) => JSX.Element = (props: buttonProps) => {
   // TODO: not to know why it add is null
   // const handleActionOnKeyUp: (e: KeyboardEvent) => void = (e: KeyboardEvent): void => {
   //   if (e.keyCode === 13) {
@@ -38,6 +45,7 @@ const Button: (props: { btnText: string; btnStyle: any; btnAction: any }) => JSX
   // }, []);
   return (
     <Wrapper onClick={props.btnAction} btnStyle={props.btnStyle}>
+      {props.children !== undefined && props.children}
       {props.btnText}
     </Wrapper>
   );
