@@ -96,6 +96,11 @@ const Timer: (props: timerProps) => JSX.Element = (props: timerProps) => {
     setIntervalId(0);
   };
 
+  const handleTimerRestartOnClick: () => void = () => {
+    setTimeRemains(25 * 60);
+    setIntervalId(0);
+  };
+
   useEffect(() => {
     if (timeRemains <= 0) {
       clearInterval(intervalId);
@@ -121,7 +126,6 @@ const Timer: (props: timerProps) => JSX.Element = (props: timerProps) => {
         <Clock timeRemains={timeRemains}></Clock>
         <ButtonGroup>
           <Button
-            btnText=""
             btnAction={handleTimerStartOnClick}
             btnStyle={{ mainColor: isDuring ? "#888888" : "#EA5548", width: "50px" }}
             isDisabled={isDuring}
@@ -129,7 +133,6 @@ const Timer: (props: timerProps) => JSX.Element = (props: timerProps) => {
             <i className="fas fa-play"></i>
           </Button>
           <Button
-            btnText=""
             btnAction={handleTimerStopOnClick}
             btnStyle={{ mainColor: isDuring ? "#EA5548" : "#888888", width: "50px" }}
             isDisabled={isDuring === false}
@@ -137,10 +140,7 @@ const Timer: (props: timerProps) => JSX.Element = (props: timerProps) => {
             <i className="fas fa-stop"></i>
           </Button>
           <Button
-            btnText=""
-            btnAction={() => {
-              console.log("reset");
-            }}
+            btnAction={handleTimerRestartOnClick}
             btnStyle={{ mainColor: isDuring ? "#888888" : "#EA5548", width: "50px" }}
             isDisabled={isDuring}
           >

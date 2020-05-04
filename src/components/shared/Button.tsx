@@ -25,7 +25,7 @@ const Wrapper: any = styled.button<{ btnStyle: any; disabled: boolean }>`
 `;
 
 type buttonProps = {
-  btnText: string;
+  btnText?: string;
   btnStyle: any;
   btnAction: any;
   isDisabled?: boolean;
