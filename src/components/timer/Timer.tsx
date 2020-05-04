@@ -75,6 +75,7 @@ const Timer: (props: timerProps) => JSX.Element = (props: timerProps) => {
   const [timeRemains, setTimeRemains] = useState(25 * 60);
   const [intervalId, setIntervalId] = useState(0);
   const timeRemainsRef: any = useRef(timeRemains);
+  const isDuring: boolean = intervalId !== 0;
   timeRemainsRef.current = timeRemains;
 
   const handleTimerStartOnClick: () => void = () => {
@@ -119,10 +120,20 @@ const Timer: (props: timerProps) => JSX.Element = (props: timerProps) => {
       <Main>
         <Clock timeRemains={timeRemains}></Clock>
         <ButtonGroup>
-          <Button btnText="" btnAction={handleTimerStartOnClick} btnStyle={{ mainColor: "#EA5548", width: "50px" }}>
+          <Button
+            btnText=""
+            btnAction={handleTimerStartOnClick}
+            btnStyle={{ mainColor: isDuring ? "#888888" : "#EA5548", width: "50px" }}
+            isDisabled={isDuring}
+          >
             <i className="fas fa-play"></i>
           </Button>
-          <Button btnText="" btnAction={handleTimerStopOnClick} btnStyle={{ mainColor: "#EA5548", width: "50px" }}>
+          <Button
+            btnText=""
+            btnAction={handleTimerStopOnClick}
+            btnStyle={{ mainColor: isDuring ? "#EA5548" : "#888888", width: "50px" }}
+            isDisabled={isDuring === false}
+          >
             <i className="fas fa-stop"></i>
           </Button>
           <Button
@@ -130,7 +141,8 @@ const Timer: (props: timerProps) => JSX.Element = (props: timerProps) => {
             btnAction={() => {
               console.log("reset");
             }}
-            btnStyle={{ mainColor: "#EA5548", width: "50px" }}
+            btnStyle={{ mainColor: isDuring ? "#888888" : "#EA5548", width: "50px" }}
+            isDisabled={isDuring}
           >
             <i className="fas fa-redo"></i>
           </Button>

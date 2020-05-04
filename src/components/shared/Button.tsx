@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-const Wrapper: any = styled.button<{ btnStyle: any }>`
+const Wrapper: any = styled.button<{ btnStyle: any; disabled: boolean }>`
   width: ${props => props.btnStyle.width};
-  border-radius: 30px;
   height: 50px;
+  border-radius: 30px;
   font-size: 19px;
   font-family: Lato;
   font-weight: bold;
@@ -20,6 +20,7 @@ const Wrapper: any = styled.button<{ btnStyle: any }>`
     color: #fcfcfc;
     border: 3px solid ${props => props.btnStyle.mainColor};
     background-color: ${props => props.btnStyle.mainColor};
+    cursor: ${props => (props.disabled === true ? "not-allowed" : "pointer")};
   }
 `;
 
@@ -27,6 +28,7 @@ type buttonProps = {
   btnText: string;
   btnStyle: any;
   btnAction: any;
+  isDisabled?: boolean;
   children?: JSX.Element;
 };
 
@@ -44,7 +46,7 @@ const Button: (props: buttonProps) => JSX.Element = (props: buttonProps) => {
   //   };
   // }, []);
   return (
-    <Wrapper onClick={props.btnAction} btnStyle={props.btnStyle}>
+    <Wrapper disabled={props.isDisabled} onClick={props.btnAction} btnStyle={props.btnStyle}>
       {props.children !== undefined && props.children}
       {props.btnText}
     </Wrapper>
