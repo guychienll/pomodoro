@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-type clockProps = {};
+type clockProps = {
+  timeRemains: number;
+};
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,9 +23,15 @@ const Time = styled.div`
 `;
 
 const Clock: (props: clockProps) => JSX.Element = (props: clockProps) => {
+  const { timeRemains } = props;
+  const getFormatedTime: (remains: number) => string = (remains: number) => {
+    const minutes: string = remains / 60 < 10 ? `0${Math.floor(remains / 60)}` : `${Math.floor(remains / 60)}`;
+    const seconds: string = remains % 60 < 10 ? `0${remains % 60}` : `${remains % 60}`;
+    return `${minutes}:${seconds}`;
+  };
   return (
     <Wrapper>
-      <Time>06:25</Time>
+      <Time>{getFormatedTime(timeRemains)}</Time>
     </Wrapper>
   );
 };

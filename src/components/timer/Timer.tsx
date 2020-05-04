@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import Clock from "./Clock";
 import { ITask } from "src/interface/ITask";
@@ -72,6 +72,35 @@ const Footer = styled.div`
   font-size: 14px;
 `;
 const Timer: (props: timerProps) => JSX.Element = (props: timerProps) => {
+  const [timeRemains, setTimeRemains] = useState(25 * 60);
+  const [intervalId, setIntervalId] = useState(0);
+  const timeRemainsRef: any = useRef(timeRemains);
+  timeRemainsRef.current = timeRemains;
+
+  const handleTimerStartOnClick: () => void = () => {
+    if (intervalId !== 0) {
+      return;
+    }
+    const id: number = setInterval(() => {
+      setTimeRemains(timeRemainsRef.current - 1);
+    }, 1000);
+    setIntervalId(id);
+  };
+
+  const handleTimerStopOnClick: () => void = () => {
+    if (intervalId === 0) {
+      return;
+    }
+    clearInterval(intervalId);
+    setIntervalId(0);
+  };
+
+  useEffect(() => {
+    if (timeRemains <= 0) {
+      clearInterval(intervalId);
+    }
+  }, [timeRemains, intervalId]);
+
   return (
     <Wrapper>
       <Header>
@@ -88,24 +117,12 @@ const Timer: (props: timerProps) => JSX.Element = (props: timerProps) => {
         </div>
       </Header>
       <Main>
-        <Clock></Clock>
+        <Clock timeRemains={timeRemains}></Clock>
         <ButtonGroup>
-          <Button
-            btnText=""
-            btnAction={() => {
-              console.log("start");
-            }}
-            btnStyle={{ mainColor: "#EA5548", width: "50px" }}
-          >
+          <Button btnText="" btnAction={handleTimerStartOnClick} btnStyle={{ mainColor: "#EA5548", width: "50px" }}>
             <i className="fas fa-play"></i>
           </Button>
-          <Button
-            btnText=""
-            btnAction={() => {
-              console.log("stop");
-            }}
-            btnStyle={{ mainColor: "#EA5548", width: "50px" }}
-          >
+          <Button btnText="" btnAction={handleTimerStopOnClick} btnStyle={{ mainColor: "#EA5548", width: "50px" }}>
             <i className="fas fa-stop"></i>
           </Button>
           <Button
