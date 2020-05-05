@@ -8,7 +8,7 @@ type timerProps = {
   taskBuffer: ITask;
 };
 
-const Wrapper = styled.div`
+const Wrapper: any = styled.div`
   width: 600px;
   font-family: Lato;
   height: 100%;
@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   justify-content: space-evenly;
   color: #333333;
 `;
-const Header = styled.div`
+const Header: any = styled.div`
   width: 400px;
   height: 100px;
   display: flex;
@@ -50,16 +50,16 @@ const Header = styled.div`
   }
 `;
 
-const Main = styled.div``;
+const Main: any = styled.div``;
 
-const ButtonGroup = styled.div`
+const ButtonGroup: any = styled.div`
   width: 400px;
   height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
-const TaskStatus = styled.div`
+const TaskStatus: any = styled.div`
   font-weight: bold;
   display: flex;
   align-items: center;
@@ -67,7 +67,7 @@ const TaskStatus = styled.div`
   margin-top: 50px;
   font-size: 18px;
 `;
-const Footer = styled.div`
+const Footer: any = styled.div`
   font-weight: light;
   font-size: 14px;
 `;
