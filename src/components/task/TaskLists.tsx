@@ -263,7 +263,7 @@ const TaskLists: (props: taskListsProps) => JSX.Element = (props: taskListsProps
                       }}
                       btnText="Redo"
                       btnAction={e => {
-                        props.handleArchiveTaskOnClick(e, props.taskBuffer.createdOn, true);
+                        props.handleRedoTaskOnClick(e, props.taskBuffer.createdOn);
                       }}
                     />
                   </BtnGroup>

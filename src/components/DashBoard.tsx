@@ -39,6 +39,7 @@ const Dashboard: (props: dashboardProps) => JSX.Element =props => {
     isDashboardOn,
     handleUpdateTaskOnClick,
     handleArchiveTaskOnClick,
+    handleRedoTaskOnClick,
   } = props;
 
   const dashboardByCurrentStatusMap: Map<enumDashboardType, JSX.Element> = new Map([
@@ -60,6 +61,7 @@ const Dashboard: (props: dashboardProps) => JSX.Element =props => {
         handleUpdateTaskOnClick={handleUpdateTaskOnClick}
         tasks={tasks}
         taskBuffer={taskBuffer}
+        handleRedoTaskOnClick={handleRedoTaskOnClick}
         handleArchiveTaskOnClick={handleArchiveTaskOnClick}
       >
         <DashboardTitle>{currentName}</DashboardTitle>

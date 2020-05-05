@@ -10,4 +10,5 @@ export type dashboardProps = {
   handleTaskBufferOnChange: any;
   handleUpdateTaskOnClick: any;
   handleArchiveTaskOnClick: any;
+  handleRedoTaskOnClick: any;
 };

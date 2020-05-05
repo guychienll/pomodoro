@@ -7,4 +7,5 @@ export type taskListsProps = {
   taskBuffer: ITask;
   handleUpdateTaskOnClick: any;
   handleArchiveTaskOnClick: any;
+  handleRedoTaskOnClick: any;
 };

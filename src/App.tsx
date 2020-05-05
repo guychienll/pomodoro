@@ -40,35 +40,7 @@ const App: () => JSX.Element = () => {
   const [isDashboardOn, setIsDashboardOn] = useState(true as boolean);
   const [dashboards, setDashboards] = useState(initDashboards as IDashboard[]);
   const [taskBuffer, setTaskBuffer] = useState(initTaskBuffer as ITask);
-  const [tasks, setTasks] = useState([
-    // {
-    //   name: "demo task 1",
-    //   point: 5,
-    //   pointHasDone: 2,
-    //   isContentOn: false,
-    //   status: enumTaskStatus.Todo,
-    //   createdOn: 11111,
-    //   modifiedOn: 11111,
-    // },
-    // {
-    //   name: "demo task 2",
-    //   point: 7,
-    //   pointHasDone: 2,
-    //   isContentOn: false,
-    //   status: enumTaskStatus.Todo,
-    //   createdOn: 22222,
-    //   modifiedOn: 22222,
-    // },
-    // {
-    //   name: "demo task 3",
-    //   point: 3,
-    //   pointHasDone: 3,
-    //   isContentOn: false,
-    //   status: enumTaskStatus.Done,
-    //   createdOn: 33333,
-    //   modifiedOn: 33333,
-    // },
-  ] as ITask[]);
+  const [tasks, setTasks] = useState([] as ITask[]);
   const [selectedTaskId, setSelectedTaskId] = useState(
     tasks.filter(task => task.status === enumTaskStatus.Todo).length !== 0
       ? tasks
@@ -114,6 +86,26 @@ const App: () => JSX.Element = () => {
     cloneTasks.forEach(task => {
       if (task.createdOn === taskId) {
         isUnArchive ? (task.status = enumTaskStatus.Todo) : (task.status = enumTaskStatus.Archieve);
+        task.modifiedOn = new Date().getTime();
+        task.isContentOn = false;
+      }
+    });
+    setTasks(cloneTasks);
+    setSelectedTaskId(
+      cloneTasks.filter(task => task.status === enumTaskStatus.Todo).length !== 0
+        ? cloneTasks
+            .filter(task => task.status === enumTaskStatus.Todo)
+            .sort((t1, t2) => (t1.createdOn > t2.createdOn ? 1 : -1))[0].createdOn
+        : 0
+    );
+  };
+
+  const handleRedoTaskOnClick: (e: any, taskId: number) => void = (e: any, taskId: number) => {
+    const cloneTasks: ITask[] = [...tasks];
+    cloneTasks.forEach(task => {
+      if (task.createdOn === taskId) {
+        task.status = enumTaskStatus.Todo;
+        task.pointHasDone = 0;
         task.modifiedOn = new Date().getTime();
         task.isContentOn = false;
       }
@@ -174,7 +166,6 @@ const App: () => JSX.Element = () => {
     const cloneTask: ITask = cloneTasks.find(task => {
       return task.createdOn === key;
     });
-    console.log(cloneTask);
     cloneTask.pointHasDone++;
     if (Number(cloneTask.point) === cloneTask.pointHasDone) {
       cloneTask.status = enumTaskStatus.Done;
@@ -186,8 +177,6 @@ const App: () => JSX.Element = () => {
           : 0
       );
     }
-    console.log(cloneTask);
-    console.log(cloneTasks);
     setTasks(cloneTasks);
   };
 
@@ -215,6 +204,7 @@ const App: () => JSX.Element = () => {
           handleTaskBufferOnChange={handleTaskBufferOnChange}
           handleUpdateTaskOnClick={handleUpdateTaskOnClick}
           handleArchiveTaskOnClick={handleArchiveTaskOnClick}
+          handleRedoTaskOnClick={handleRedoTaskOnClick}
         />
       </DashboardWrapper>
     </Container>
