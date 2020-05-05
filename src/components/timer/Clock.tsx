@@ -51,7 +51,7 @@ const Time = styled.div`
 
 const Clock: (props: clockProps) => JSX.Element = (props: clockProps) => {
   const { timeRemains } = props;
-  const remains: number = -435 * ((25 * 60 - timeRemains) / (25 * 60));
+  const remains: number = -435 * ((5 - timeRemains) / 5);
   const getFormatedTime: (remains: number) => string = (remains: number) => {
     const minutes: string = remains / 60 < 10 ? `0${Math.floor(remains / 60)}` : `${Math.floor(remains / 60)}`;
     const seconds: string = remains % 60 < 10 ? `0${remains % 60}` : `${remains % 60}`;

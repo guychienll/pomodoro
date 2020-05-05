@@ -5,7 +5,8 @@ import { ITask } from "src/interface/ITask";
 import Button from "../shared/Button";
 
 type timerProps = {
-  taskBuffer: ITask;
+  selectedTask: ITask;
+  handleClockTimeUp: any;
 };
 
 const Wrapper: any = styled.div`
@@ -72,14 +73,14 @@ const Footer: any = styled.div`
   font-size: 14px;
 `;
 const Timer: (props: timerProps) => JSX.Element = (props: timerProps) => {
-  const [timeRemains, setTimeRemains] = useState(25 * 60);
+  const [timeRemains, setTimeRemains] = useState(5);
   const [intervalId, setIntervalId] = useState(0);
   const timeRemainsRef: any = useRef(timeRemains);
   const isDuring: boolean = intervalId !== 0;
   timeRemainsRef.current = timeRemains;
 
   const handleTimerStartOnClick: () => void = () => {
-    if (intervalId !== 0) {
+    if (intervalId !== 0 || props.selectedTask === undefined) {
       return;
     }
     const id: number = setInterval(() => {
@@ -97,30 +98,40 @@ const Timer: (props: timerProps) => JSX.Element = (props: timerProps) => {
   };
 
   const handleTimerRestartOnClick: () => void = () => {
-    setTimeRemains(25 * 60);
+    setTimeRemains(5);
     setIntervalId(0);
   };
 
   useEffect(() => {
+    const { handleClockTimeUp, selectedTask } = props;
     if (timeRemains <= 0) {
       clearInterval(intervalId);
+      setIntervalId(0);
+      setTimeRemains(5);
+      handleClockTimeUp(selectedTask.createdOn);
     }
-  }, [timeRemains, intervalId]);
+  }, [timeRemains, intervalId, props]);
 
   return (
     <Wrapper>
       <Header>
-        <div className="name">{props.taskBuffer.name}</div>
-        <div className="tomatos">
-          {Array.from({ length: props.taskBuffer.pointHasDone }, (_v, i) => i).map((_tomato, index) => (
-            <div key={index} className="tomato" />
-          ))}
-          {Array.from({ length: props.taskBuffer.point - props.taskBuffer.pointHasDone }, (_v, i) => i).map(
-            (_tomato, index) => (
-              <div key={index} className="unDoneTomato" />
-            )
-          )}
-        </div>
+        {props.selectedTask !== undefined ? (
+          <>
+            <div className="name">{props.selectedTask.name}</div>
+            <div className="tomatos">
+              {Array.from({ length: props.selectedTask.pointHasDone }, (_v, i) => i).map((_tomato, index) => (
+                <div key={index} className="tomato" />
+              ))}
+              {Array.from({ length: props.selectedTask.point - props.selectedTask.pointHasDone }, (_v, i) => i).map(
+                (_tomato, index) => (
+                  <div key={index} className="unDoneTomato" />
+                )
+              )}
+            </div>
+          </>
+        ) : (
+          <div className="name">CREATE YOUR TASK</div>
+        )}
       </Header>
       <Main>
         <Clock timeRemains={timeRemains}></Clock>

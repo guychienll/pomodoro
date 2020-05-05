@@ -63,7 +63,7 @@ const Task = styled.div`
 `;
 const Title = styled.div`
   width: calc(100% / 3.5);
-  min-width: 120px;
+  min-width: 150px;
   height: 100%;
   display: flex;
   flex-direction: column;
