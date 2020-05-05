@@ -15,7 +15,7 @@ const wave = keyframes`
   }
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ remains: number }>`
   width: 400px;
   height: 400px;
   display: flex;
@@ -30,7 +30,9 @@ const Wrapper = styled.div`
   ::before {
     content: "";
     position: absolute;
-    top: -60%;
+    top: ${props => {
+      return `calc(-45% + ${props.remains}px)`;
+    }};
     left: -22%;
     width: 145%;
     height: 145%;
@@ -49,13 +51,14 @@ const Time = styled.div`
 
 const Clock: (props: clockProps) => JSX.Element = (props: clockProps) => {
   const { timeRemains } = props;
+  const remains: number = -435 * ((25 * 60 - timeRemains) / (25 * 60));
   const getFormatedTime: (remains: number) => string = (remains: number) => {
     const minutes: string = remains / 60 < 10 ? `0${Math.floor(remains / 60)}` : `${Math.floor(remains / 60)}`;
     const seconds: string = remains % 60 < 10 ? `0${remains % 60}` : `${remains % 60}`;
     return `${minutes}:${seconds}`;
   };
   return (
-    <Wrapper>
+    <Wrapper remains={remains}>
       <Time>{getFormatedTime(timeRemains)}</Time>
     </Wrapper>
   );
